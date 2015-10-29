@@ -50,6 +50,7 @@ function init() {
 }
 
 function listSerialPorts() {
+    console.log('Local Serial Ports');
     serialPort.list(function (err, ports) {
       ports.forEach(function(port) {
         console.log(port.comName);
