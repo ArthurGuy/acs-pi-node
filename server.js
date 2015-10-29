@@ -111,7 +111,7 @@ function sendBoot() {
 function lookupTag(tagId) {
     console.log('Looking up tag', tagId);
     request.post(
-        'https://bbms.buildbrighton.dev/acs', {
+        'https://bbms.buildbrighton.com/acs', {
             json: {
                 device: 'pi-node-test',
                 service: 'status',
