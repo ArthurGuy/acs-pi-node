@@ -56,10 +56,14 @@ function monitorKeyboard() {
     console.log('Monitoring the stream', device);
 
     var input = new tty.ReadStream(fs.openSync(device, "r") );
-    input.setRawMode(true);
+    //input.setRawMode(true);
 
     input.on("data", function(chunk) {
-        console.log("Read chunk from CHAR_DEVICE:", chunk);
+        console.log("Read data:", chunk.toString());
+    });
+
+    input.on('error', function(err) {
+        console.log(err);
     });
 
 
