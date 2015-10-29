@@ -5,16 +5,10 @@ var db = new PouchDB('bb_members');
 
 
 
-db.put({
-  _id: '123abc',
-  name: 'David'
-}).then(function (response) {
-  // handle response
-}).catch(function (err) {
-  console.error(err);
-});
 
-
+findRecord('abcdefg').then(function(result) { console.log('Found Result:', result)});
+findRecord('rgfwae');
+saveRecord('abcdefg', {name:'John Doe'});
 
 
 //rpi-gpio
@@ -31,9 +25,29 @@ function init() {
 
     db.info().then(function (result) {
         console.log('Local DB Records:', result.doc_count);
-    }).catch(function (err) {
-        console.error(err);
+    }).catch(function (error) {
+        console.error(error);
     });
+}
+
+
+function saveRecord(tagId, data) {
+    data._id = tagId;
+
+    findRecord(tagId)
+    .then(function(result) {
+        //Existing record
+        data._rev = result._rev;
+        return db.put(data);
+    })
+    .catch(function() {
+        //no existing record
+        return db.put(data);
+    })
+}
+
+function findRecord(tagId) {
+    return db.get(tagId);
 }
 
 function sendHeartBeat() {
