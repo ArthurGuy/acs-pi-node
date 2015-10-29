@@ -3,6 +3,8 @@ var request = require('request');
 var PouchDB = require('pouchdb');
 var db = new PouchDB('bb_members');
 
+var serialPort = require("serialport");
+
 
 
 
@@ -10,11 +12,18 @@ findRecord('abcdefg').then(function(result) { console.log('Found Result:', resul
 findRecord('rgfwae');
 saveRecord('abcdefg', {name:'John Doe'});
 
-
+//GPIO Node Library
 //rpi-gpio
+
+//GPIO Serial
+//http://blog.oscarliang.net/raspberry-pi-and-arduino-connected-serial-gpio/
+
+//Node Serialport library
+//https://github.com/voodootikigod/node-serialport
 
 init();
 
+listSerialPorts();
 
 
 
@@ -27,6 +36,16 @@ function init() {
         console.log('Local DB Records:', result.doc_count);
     }).catch(function (error) {
         console.error(error);
+    });
+}
+
+function listSerialPorts() {
+    serialPort.list(function (err, ports) {
+      ports.forEach(function(port) {
+        console.log(port.comName);
+        console.log(port.pnpId);
+        console.log(port.manufacturer);
+      });
     });
 }
 
