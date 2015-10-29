@@ -1,13 +1,73 @@
 var request = require('request');
 
-var text = process.env.TEXT || 'Say hello to my little friend';
+var PouchDB = require('pouchdb');
+var db = new PouchDB('bb_members');
 
-var url = {
-	url: 'http://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=t&q=' + encodeURIComponent(text),
-	headers: {
-		'User-Agent': 'stagefright/1.2 (Linux;Android 5.0)',
-		'Referer': 'http://translate.google.com/'
-  	}
-};
 
-request(url);
+
+db.put({
+  _id: '123abc',
+  name: 'David'
+}).then(function (response) {
+  // handle response
+}).catch(function (err) {
+  console.error(err);
+});
+
+
+
+
+//rpi-gpio
+
+init();
+
+
+
+
+
+function init() {
+    sendBoot();
+    setInterval(sendHeartBeat, 60000);
+
+    db.info().then(function (result) {
+        console.log('Local DB Records:', result.doc_count);
+    }).catch(function (err) {
+        console.error(err);
+    });
+}
+
+function sendHeartBeat() {
+    request.post(
+        'https://bbms.buildbrighton.com/acs', {
+            json: {
+                device: 'pi-node-test',
+                service: 'status',
+                message: 'heartbeat',
+                time: Math.floor(Date.now() / 1000)
+            }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log('Heartbeat sent');
+            }
+        }
+    );
+}
+function sendBoot() {
+    request.post(
+        'https://bbms.buildbrighton.com/acs', {
+            json: {
+                device: 'pi-node-test',
+                service: 'status',
+                message: 'boot',
+                time: Math.floor(Date.now() / 1000)
+            }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                //console.log(body);
+                console.log('Boot message sent');
+            }
+        }
+    );
+}
