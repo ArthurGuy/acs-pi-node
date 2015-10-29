@@ -3,9 +3,7 @@ var request = require('request');
 var PouchDB = require('pouchdb');
 var db = new PouchDB('bb_members');
 
-var serialPort = require("serialport");
-var SerialPort = require("serialport").SerialPort;
-var gpio = require('rpi-gpio');
+//var gpio = require('rpi-gpio');
 
 
 
@@ -23,10 +21,11 @@ saveRecord('abcdefg', {name:'John Doe'});
 //Node Serialport library
 //https://github.com/voodootikigod/node-serialport
 
+
+
 init();
 
-listSerialPorts();
-
+monitorKeyboard();
 
 
 
@@ -40,23 +39,16 @@ function init() {
         console.error(error);
     });
 
-    //RFID Reset pin - hold high
-    gpio.setup(18, gpio.DIR_OUT, readInput);
-    gpio.write(18, 1);
-
-    //var rfidSerialPort = new SerialPort("/dev/tty-usbserial1", {
-    //    baudrate: 9600
-    //});
 }
 
-function listSerialPorts() {
-    console.log('Local Serial Ports');
-    serialPort.list(function (err, ports) {
-      ports.forEach(function(port) {
-        console.log(port.comName);
-        console.log(port.pnpId);
-        console.log(port.manufacturer);
-      });
+function monitorKeyboard() {
+    process.stdin.resume();
+    process.stdin.setEncoding('utf8');
+    var util = require('util');
+
+    process.stdin.on('data', function (text) {
+        console.log('received data:', util.inspect(text));
+        lookupTag(text);
     });
 }
 
@@ -111,6 +103,28 @@ function sendBoot() {
             if (!error && response.statusCode == 200) {
                 //console.log(body);
                 console.log('Boot message sent');
+            }
+        }
+    );
+}
+
+function lookupTag(tagId) {
+    console.log('Looking up tag', tagId);
+    request.post(
+        'https://bbms.buildbrighton.dev/acs', {
+            json: {
+                device: 'pi-node-test',
+                service: 'status',
+                message: 'lookup',
+                tag: tagId,
+                time: Math.floor(Date.now() / 1000)
+            }
+        },
+        function (error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Tag lookup sent', body);
             }
         }
     );
