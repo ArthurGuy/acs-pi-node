@@ -1,5 +1,8 @@
 var request = require('request');
 
+var tty = require('tty');
+var fs = require('fs');
+
 var PouchDB = require('pouchdb');
 var db = new PouchDB('bb_members');
 
@@ -42,7 +45,17 @@ function init() {
 }
 
 function monitorKeyboard() {
-    //process.stdin.resume();
+
+    const CHAR_DEVICE = "/dev/tty";
+    var input = new tty.ReadStream(fs.openSync(CHAR_DEVICE, "r") );
+    input.setRawMode(true);
+
+    input.on("data", function(chunk) {
+        console.log("Read chunk from CHAR_DEVICE:", chunk);
+    });
+
+
+    /*
     process.stdin.setEncoding('utf8');
     var util = require('util');
 
@@ -50,6 +63,7 @@ function monitorKeyboard() {
         console.log('received data:', util.inspect(text));
         lookupTag(text);
     });
+    */
 }
 
 
