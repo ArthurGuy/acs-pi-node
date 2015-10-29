@@ -1,6 +1,8 @@
 
 FROM resin/rpi-node:0.10.36
 
+RUN sudo apt-get install minicom
+
 # Move all the files into the default /app directory
 COPY . /app
 
