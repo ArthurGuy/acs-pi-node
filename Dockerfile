@@ -1,12 +1,13 @@
-FROM resin/rpi-raspbian:jessie
-# Install Python.
-RUN apt-get update \
-	&& apt-get install -y python \
-	# Remove package lists to free up space
-	&& rm -rf /var/lib/apt/lists/*
 
-# copy current directory into /app
+FROM resin/rpi-node:0.10.36
+
+# Move all the files into the default /app directory
 COPY . /app
 
-# run python script when container lands on device
-CMD ["python", "/app/start.py"]
+WORKDIR /app
+
+# Run npm install to load dependencies
+RUN npm install
+
+# Start the node service
+CMD ["node", "server.js"]
