@@ -46,8 +46,16 @@ function init() {
 
 function monitorKeyboard() {
 
-    const CHAR_DEVICE = "/dev/tty";
-    var input = new tty.ReadStream(fs.openSync(CHAR_DEVICE, "r") );
+    var device = '';
+    if (process.env.DEVICE_STREAM) {
+        device = process.env.DEVICE_STREAM;
+    } else {
+        device = "/dev/tty";
+    }
+
+    console.log('Monitoring the stream', device);
+
+    var input = new tty.ReadStream(fs.openSync(device, "r") );
     input.setRawMode(true);
 
     input.on("data", function(chunk) {

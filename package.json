@@ -6,8 +6,7 @@
   "dependencies": {
     "pouchdb": "^5.0.0",
     "request": "^2.55.0",
-    "rpi-gpio": "^0.7.0",
-    "serialport": "^2.0.2"
+    "rpi-gpio": "^0.7.0"
   },
   "engines": {
     "node": "0.10.36"
