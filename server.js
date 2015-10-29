@@ -4,6 +4,7 @@ var PouchDB = require('pouchdb');
 var db = new PouchDB('bb_members');
 
 var serialPort = require("serialport");
+var SerialPort = require("serialport").SerialPort;
 var gpio = require('rpi-gpio');
 
 
@@ -42,6 +43,10 @@ function init() {
     //RFID Reset pin - hold high
     gpio.setup(18, gpio.DIR_OUT, readInput);
     gpio.write(18, 1);
+
+    //var rfidSerialPort = new SerialPort("/dev/tty-usbserial1", {
+    //    baudrate: 9600
+    //});
 }
 
 function listSerialPorts() {
