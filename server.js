@@ -86,26 +86,28 @@ function monitorKeyboard() {
                     tagNumberTotal += number * Math.pow(10, (9 - i));
                     i++;
                 }
-                console.log('Converted Number:', number);
+                //console.log('Converted Number:', number);
 
                 //carrage return
                 if (number === 11) {
 
-                    console.log("Tag ID Array:", tagArray);
-                    console.log("Tag Number (decimal):", tagNumberTotal);
-                    console.log("Tag Number (hex):", tagNumberTotal.toString(16));
-                    hexString = pad(tagNumberTotal.toString(16), 10);
+                    //console.log("Tag ID Array:", tagArray);
+                    //console.log("Tag Number (decimal):", tagNumberTotal);
+                    //console.log("Tag Number (hex):", tagNumberTotal.toString(16));
+                    hexString = pad(tagNumberTotal.toString(16), 10).toUpperCase();
                     console.log("Padded Tag Number (hex):", hexString);
 
                     hexChunkArray = hexString.match(/.{1,2}/g);
                     console.log("Hex chunk array:", hexChunkArray);
-
+                    /*
                     checksum = hexChunkArray[0];
                     for (var x = 1; x < 5; x++) {
                         checksum ^= hexChunkArray[x];
                     }
                     console.log('Checksum: ', checksum.toString(16));
+                    */
 
+                    lookupTag(hexString);
 
                     //Reset variables
                     tagArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
