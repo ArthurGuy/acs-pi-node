@@ -83,14 +83,14 @@ function monitorKeyboard() {
                 if (number < 10) {
                     tagArray[i] = number;
 
-                    tagNumberTotal += number * (10 ^ (10 - i));
+                    tagNumberTotal += number * Math.pow(10, (9 - i));
                     i++;
                 }
                 console.log('Converted Number:', number);
 
                 //carrage return
                 if (number === 11) {
-                    i = 0;
+
                     console.log("Tag ID Array:", tagArray);
                     console.log("Tag Number (decimal):", tagNumberTotal);
                     console.log("Tag Number (hex):", tagNumberTotal.toString(16));
@@ -99,11 +99,20 @@ function monitorKeyboard() {
 
                     hexChunkArray = hexString.match(/.{1,2}/g);
                     console.log("Hex chunk array:", hexChunkArray);
+
                     checksum = hexChunkArray[0];
                     for (var x = 1; x < 5; x++) {
                         checksum ^= hexChunkArray[x];
                     }
-                    console.log('Checksum: ', checksum);
+                    console.log('Checksum: ', checksum.toString(16));
+
+
+                    //Reset variables
+                    tagArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    tagNumberTotal = 0;
+                    hexChunkArray = [];
+                    hexString = '';
+                    i = 0;
                 }
             }
         });
