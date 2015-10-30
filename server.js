@@ -58,14 +58,34 @@ function monitorKeyboard() {
 
     console.log('Monitoring the stream', device);
 
+    var number;
+    var tagArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var i = 0;
+
     try {
         var input = new tty.ReadStream(fs.openSync(device, "r") );
         input.setRawMode(true);
 
         input.on("data", function(chunk) {
-            console.log("Raw:", chunk);
+            //console.log("Raw:", chunk);
             console.log("Raw 0:", chunk[0], '1:', chunk[1], '2:', chunk[2], '3:', chunk[3], '4:', chunk[4], '5:', chunk[5], '6:', chunk[6], '7:', chunk[7]);
-            console.log("Asci Encoded:", chunk.toString('ascii'));
+
+            if (chunk[2] !== 0) {
+                number = chunk[2] - 29;
+                if (number === 10) {
+                    number = 0;
+                }
+                //add the number to the tag array
+                if (number < 10) {
+                    tagArray[i] = number;
+                }
+                console.log('Converted Number:', number);
+
+                if (number === 11) {
+                    i = 0;
+                    Console.log("Tag ID:", tagArray);
+                }
+            }
         });
 
         input.on('error', function(err) {
