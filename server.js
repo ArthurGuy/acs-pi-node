@@ -83,7 +83,7 @@ function monitorKeyboard() {
                 if (number < 10) {
                     tagArray[i] = number;
 
-                    tagNumberTotal += number * (10 - i);
+                    tagNumberTotal += number * (10 ^ (10 - i));
                     i++;
                 }
                 console.log('Converted Number:', number);
