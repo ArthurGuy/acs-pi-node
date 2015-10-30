@@ -17,6 +17,7 @@ saveRecord('abcdefg', {name:'John Doe'});
 
 //GPIO Node Library
 //rpi-gpio
+//https://www.npmjs.com/package/pi-pins
 
 //GPIO Serial
 //http://blog.oscarliang.net/raspberry-pi-and-arduino-connected-serial-gpio/
@@ -52,6 +53,8 @@ function monitorKeyboard() {
     } else {
         device = "/dev/tty";
     }
+    ///dev/hidraw0
+    ///dev/input/event0
 
     console.log('Monitoring the stream', device);
 
@@ -60,16 +63,22 @@ function monitorKeyboard() {
         input.setRawMode(true);
 
         input.on("data", function(chunk) {
-            console.log("Read data:", chunk.toString());
+            console.log("Read data:", chunk);
         });
 
         input.on('error', function(err) {
             console.log(err);
+
+            //Try and connect again in 10 seconds
+            setTimeout(monitorKeyboard, 10000);
         });
 
     } catch (error) {
         console.log("Error listening to the RFID Reader");
         console.log(error);
+
+        //Try and connect again in 10 seconds
+        setTimeout(monitorKeyboard, 10000);
     }
 
 
