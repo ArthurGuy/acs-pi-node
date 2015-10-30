@@ -57,7 +57,7 @@ function monitorKeyboard() {
 
     try {
         var input = new tty.ReadStream(fs.openSync(device, "r") );
-        //input.setRawMode(true);
+        input.setRawMode(true);
 
         input.on("data", function(chunk) {
             console.log("Read data:", chunk.toString());
