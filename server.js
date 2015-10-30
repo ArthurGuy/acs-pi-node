@@ -55,16 +55,22 @@ function monitorKeyboard() {
 
     console.log('Monitoring the stream', device);
 
-    var input = new tty.ReadStream(fs.openSync(device, "r") );
-    //input.setRawMode(true);
+    try {
+        var input = new tty.ReadStream(fs.openSync(device, "r") );
+        //input.setRawMode(true);
 
-    input.on("data", function(chunk) {
-        console.log("Read data:", chunk.toString());
-    });
+        input.on("data", function(chunk) {
+            console.log("Read data:", chunk.toString());
+        });
 
-    input.on('error', function(err) {
-        console.log(err);
-    });
+        input.on('error', function(err) {
+            console.log(err);
+        });
+
+    } catch (error) {
+        console.log("Error listening to the RFID Reader");
+        console.log(error);
+    }
 
 
     /*
