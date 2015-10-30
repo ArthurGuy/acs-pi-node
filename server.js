@@ -64,7 +64,8 @@ function monitorKeyboard() {
 
         input.on("data", function(chunk) {
             console.log("Raw:", chunk);
-            console.log("Read data:", chunk.toString('ascii'), chunk.toString('ascii', 2, 2));
+            console.log("Raw 0:", chunk[0], '1:', chunk[1], '2:', chunk[2], '3:', chunk[3], '4:', chunk[4], '5:', chunk[5], '6:', chunk[6], '7:', chunk[7]);
+            console.log("Asci Encoded:", chunk.toString('ascii'));
         });
 
         input.on('error', function(err) {
