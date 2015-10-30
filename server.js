@@ -63,7 +63,8 @@ function monitorKeyboard() {
         input.setRawMode(true);
 
         input.on("data", function(chunk) {
-            console.log("Read data:", chunk);
+            console.log("Raw:", chunk);
+            console.log("Read data:", chunk.toString('ascii'), chunk.toString('ascii', 2, 2));
         });
 
         input.on('error', function(err) {
