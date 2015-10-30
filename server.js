@@ -60,6 +60,7 @@ function monitorKeyboard() {
 
     var number;
     var tagArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var tagNumberTotal = 0;
     var i = 0;
 
     try {
@@ -68,7 +69,7 @@ function monitorKeyboard() {
 
         input.on("data", function(chunk) {
             //console.log("Raw:", chunk);
-            console.log("Raw 0:", chunk[0], '1:', chunk[1], '2:', chunk[2], '3:', chunk[3], '4:', chunk[4], '5:', chunk[5], '6:', chunk[6], '7:', chunk[7]);
+            //console.log("Raw 0:", chunk[0], '1:', chunk[1], '2:', chunk[2], '3:', chunk[3], '4:', chunk[4], '5:', chunk[5], '6:', chunk[6], '7:', chunk[7]);
 
             if (chunk[2] !== 0) {
                 number = chunk[2] - 29;
@@ -78,12 +79,19 @@ function monitorKeyboard() {
                 //add the number to the tag array
                 if (number < 10) {
                     tagArray[i] = number;
+
+                    tagNumberTotal += number * (10 - i);
+
                 }
                 console.log('Converted Number:', number);
 
+                //carrage return
                 if (number === 11) {
                     i = 0;
-                    Console.log("Tag ID:", tagArray);
+                    console.log("Tag ID Array:", tagArray);
+                    console.log("Tag Number (decimal):", tagNumberTotal);
+                    console.log("Tag Number (hex):", tagNumberTotal.toString(16));
+                    console.log("Padded Tag Number (hex):", pad(tagNumberTotal.toString(16), 10));
                 }
             }
         });
@@ -191,4 +199,10 @@ function lookupTag(tagId) {
             }
         }
     );
+}
+
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
