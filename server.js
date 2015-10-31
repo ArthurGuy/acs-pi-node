@@ -8,7 +8,7 @@ var db = new PouchDB('bb_members');
 
 //var gpio = require('rpi-gpio');
 
-
+var baseRequest;
 
 
 findRecord('abcdefg').then(function(result) { console.log('Found Result:', result)});
@@ -31,6 +31,7 @@ init();
 
 monitorKeyboard();
 
+//lookupTag('00005AAA5C');
 
 
 function init() {
@@ -41,6 +42,13 @@ function init() {
         console.log('Local DB Records:', result.doc_count);
     }).catch(function (error) {
         console.error(error);
+    });
+
+    baseRequest = request.defaults({
+        headers: {
+            Accept: 'application/json',
+            ApiKey: 'my-token'
+        }
     });
 
 }
@@ -204,13 +212,14 @@ function sendBoot() {
 
 function lookupTag(tagId) {
     console.log('Looking up tag', tagId);
-    request
-        .get('https://bbms.buildbrighton.com/acs/status/'+tagId)
-        .on('response', function(response) {
-            console.log('Tag lookup sent', response);
-        })
-        .on('error', function(error) {
-            console.log(error);
+    baseRequest
+        .get('https://bbms.buildbrighton.com/acs/status/'+tagId,
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log('Status', response.body);
+            } else {
+                console.log('Error', response.body);
+            }
         });
 }
 
