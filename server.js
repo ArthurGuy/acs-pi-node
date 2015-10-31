@@ -41,7 +41,7 @@ function init() {
     baseRequest = request.defaults({
         headers: {
             Accept: 'application/json',
-            ApiKey: 'my-token'
+            ApiKey: 'pi-test-2'
         }
     });
 
@@ -65,7 +65,7 @@ function monitorKeyboard() {
     if (process.env.DEVICE_STREAM) {
         device = process.env.DEVICE_STREAM;
     } else {
-        device = "/dev/tty";
+        device = "/dev/hidraw0";
     }
     ///dev/hidraw0
     ///dev/input/event0
