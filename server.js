@@ -3,6 +3,9 @@ var request = require('request');
 var tty = require('tty');
 var fs = require('fs');
 
+//var lcdplate = require('adafruit-i2c-lcd').plate;
+//var lcd = new lcdplate('/dev/i2c-1', 0x20);
+
 var PouchDB = require('pouchdb');
 var db = new PouchDB('bb_members');
 
@@ -29,7 +32,7 @@ saveRecord('abcdefg', {name:'John Doe'});
 
 init();
 
-//monitorKeyboard();
+monitorKeyboard();
 
 sendHeartBeat();
 
@@ -50,6 +53,9 @@ function init() {
     }).catch(function (error) {
         console.error(error);
     });
+
+    //lcd.backlight(lcd.colors.ON);
+    //lcd.message('BBMS ACS Pi Node');
 
 }
 

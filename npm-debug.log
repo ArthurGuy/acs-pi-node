@@ -2,7 +2,7 @@
 1 verbose cli [ 'node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'install',
-1 verbose cli   'node-keyboard',
+1 verbose cli   'adafruit-i2c-lcd',
 1 verbose cli   '--save' ]
 2 info using npm@2.9.0
 3 info using node@v0.12.2
@@ -14,77 +14,709 @@
 9 verbose installManyTop reading scoped package data from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/rpi-gpio/package.json
 10 verbose installManyTop reading scoped package data from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/serialport/package.json
 11 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/package.json
-12 silly cache add args [ 'node-keyboard', null ]
-13 verbose cache add spec node-keyboard
-14 silly cache add parsed spec { raw: 'node-keyboard',
+12 silly cache add args [ 'adafruit-i2c-lcd', null ]
+13 verbose cache add spec adafruit-i2c-lcd
+14 silly cache add parsed spec { raw: 'adafruit-i2c-lcd',
 14 silly cache add   scope: null,
-14 silly cache add   name: 'node-keyboard',
+14 silly cache add   name: 'adafruit-i2c-lcd',
 14 silly cache add   rawSpec: '',
 14 silly cache add   spec: '*',
 14 silly cache add   type: 'range' }
-15 silly addNamed node-keyboard@*
-16 verbose addNamed "*" is a valid semver range for node-keyboard
-17 silly addNameRange { name: 'node-keyboard', range: '*', hasData: false }
-18 silly mapToRegistry name node-keyboard
+15 silly addNamed adafruit-i2c-lcd@*
+16 verbose addNamed "*" is a valid semver range for adafruit-i2c-lcd
+17 silly addNameRange { name: 'adafruit-i2c-lcd', range: '*', hasData: false }
+18 silly mapToRegistry name adafruit-i2c-lcd
 19 silly mapToRegistry using default registry
 20 silly mapToRegistry registry https://registry.npmjs.org/
-21 silly mapToRegistry uri https://registry.npmjs.org/node-keyboard
-22 verbose addNameRange registry:https://registry.npmjs.org/node-keyboard not in flight; fetching
-23 verbose request uri https://registry.npmjs.org/node-keyboard
+21 silly mapToRegistry uri https://registry.npmjs.org/adafruit-i2c-lcd
+22 verbose addNameRange registry:https://registry.npmjs.org/adafruit-i2c-lcd not in flight; fetching
+23 verbose request uri https://registry.npmjs.org/adafruit-i2c-lcd
 24 verbose request no auth needed
-25 info attempt registry request try #1 at 10:11:27 PM
+25 info attempt registry request try #1 at 9:30:50 AM
 26 verbose request using bearer token for auth
-27 verbose request id 409bac36b1281ca4
-28 http request GET https://registry.npmjs.org/node-keyboard
-29 http 404 https://registry.npmjs.org/node-keyboard
-30 verbose headers { 'content-type': 'application/json',
-30 verbose headers   'cache-control': 'max-age=0',
-30 verbose headers   'content-length': '2',
-30 verbose headers   'accept-ranges': 'bytes',
-30 verbose headers   date: 'Thu, 29 Oct 2015 22:11:27 GMT',
-30 verbose headers   via: '1.1 varnish',
-30 verbose headers   connection: 'keep-alive',
-30 verbose headers   'x-served-by': 'cache-ams4125-AMS',
-30 verbose headers   'x-cache': 'MISS',
-30 verbose headers   'x-cache-hits': '0',
-30 verbose headers   'x-timer': 'S1446156687.406523,VS0,VE99' }
-31 silly get cb [ 404,
-31 silly get   { 'content-type': 'application/json',
-31 silly get     'cache-control': 'max-age=0',
-31 silly get     'content-length': '2',
+27 verbose request id 6efd5e15acedfd90
+28 verbose etag "66K3ZC04YXSJLD0EJXPR9QFVP"
+29 http request GET https://registry.npmjs.org/adafruit-i2c-lcd
+30 http 304 https://registry.npmjs.org/adafruit-i2c-lcd
+31 silly get cb [ 304,
+31 silly get   { 'cache-control': 'max-age=60',
 31 silly get     'accept-ranges': 'bytes',
-31 silly get     date: 'Thu, 29 Oct 2015 22:11:27 GMT',
+31 silly get     date: 'Sat, 31 Oct 2015 09:30:51 GMT',
 31 silly get     via: '1.1 varnish',
 31 silly get     connection: 'keep-alive',
-31 silly get     'x-served-by': 'cache-ams4125-AMS',
+31 silly get     'x-served-by': 'cache-ams4127-AMS',
 31 silly get     'x-cache': 'MISS',
 31 silly get     'x-cache-hits': '0',
-31 silly get     'x-timer': 'S1446156687.406523,VS0,VE99' } ]
-32 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/node-keyboard
-32 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:239:14)
-32 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:170:14)
-32 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:368:22)
-32 verbose stack     at Request.emit (events.js:110:17)
-32 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1219:14)
-32 verbose stack     at Request.emit (events.js:129:20)
-32 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1167:12)
-32 verbose stack     at IncomingMessage.emit (events.js:129:20)
-32 verbose stack     at _stream_readable.js:908:16
-32 verbose stack     at process._tickCallback (node.js:355:11)
-33 verbose statusCode 404
-34 verbose pkgid node-keyboard
-35 verbose cwd /Users/Arthur/Code/BuildBrighton/acs-pi
-36 error Darwin 14.5.0
-37 error argv "node" "/usr/local/bin/npm" "install" "node-keyboard" "--save"
-38 error node v0.12.2
-39 error npm  v2.9.0
-40 error code E404
-41 error 404 Registry returned 404 for GET on https://registry.npmjs.org/node-keyboard
-41 error 404
-41 error 404 'node-keyboard' is not in the npm registry.
-41 error 404 You should bug the author to publish it (or use the name yourself!)
-41 error 404 It was specified as a dependency of 'bbacs-pi-test'
-41 error 404
-41 error 404 Note that you can also install from a
-41 error 404 tarball, folder, http url, or git url.
-42 verbose exit [ 1, true ]
+31 silly get     'x-timer': 'S1446283851.032002,VS0,VE178' } ]
+32 verbose etag https://registry.npmjs.org/adafruit-i2c-lcd from cache
+33 verbose get saving adafruit-i2c-lcd to /Users/Arthur/.npm/registry.npmjs.org/adafruit-i2c-lcd/.cache.json
+34 silly addNameRange number 2 { name: 'adafruit-i2c-lcd', range: '*', hasData: true }
+35 silly addNameRange versions [ 'adafruit-i2c-lcd',
+35 silly addNameRange   [ '0.0.1', '0.0.2', '0.0.2-a', '0.0.3', '0.1.0' ] ]
+36 silly addNamed adafruit-i2c-lcd@0.1.0
+37 verbose addNamed "0.1.0" is a plain semver version for adafruit-i2c-lcd
+38 silly cache afterAdd adafruit-i2c-lcd@0.1.0
+39 verbose afterAdd /Users/Arthur/.npm/adafruit-i2c-lcd/0.1.0/package/package.json not in flight; writing
+40 verbose afterAdd /Users/Arthur/.npm/adafruit-i2c-lcd/0.1.0/package/package.json written
+41 silly install resolved [ { name: 'adafruit-i2c-lcd',
+41 silly install resolved     version: '0.1.0',
+41 silly install resolved     description: 'Node Library for using adafruit i2c rgb lcd pi plate',
+41 silly install resolved     main: './lib/index.js',
+41 silly install resolved     dependencies: { i2c: '0.2.1' },
+41 silly install resolved     devDependencies: { 'coffee-script': '' },
+41 silly install resolved     scripts: { prepublish: 'node_modules/coffee-script/bin/coffee -o lib -c src' },
+41 silly install resolved     repository:
+41 silly install resolved      { type: 'git',
+41 silly install resolved        url: 'git+https://github.com/fehmer/adafruit-i2c-lcd.git' },
+41 silly install resolved     keywords: [ 'raspberry', 'pi', 'adafruit', 'i2c', 'lcd', 'rgb', 'plate' ],
+41 silly install resolved     author: { name: 'Christian Fehmer' },
+41 silly install resolved     license: 'BSD',
+41 silly install resolved     gitHead: '38d6cf40d8596c00adb3b8eac3e08090708e3e0c',
+41 silly install resolved     bugs: { url: 'https://github.com/fehmer/adafruit-i2c-lcd/issues' },
+41 silly install resolved     homepage: 'https://github.com/fehmer/adafruit-i2c-lcd',
+41 silly install resolved     _id: 'adafruit-i2c-lcd@0.1.0',
+41 silly install resolved     _shasum: 'b32cc8a03b0cac9890b804b2afd85e73fec79771',
+41 silly install resolved     _from: 'adafruit-i2c-lcd@*',
+41 silly install resolved     _npmVersion: '2.5.1',
+41 silly install resolved     _nodeVersion: '0.12.1',
+41 silly install resolved     _npmUser: { name: 'fehmer', email: 'npm@fehmer.info' },
+41 silly install resolved     dist:
+41 silly install resolved      { shasum: 'b32cc8a03b0cac9890b804b2afd85e73fec79771',
+41 silly install resolved        tarball: 'http://registry.npmjs.org/adafruit-i2c-lcd/-/adafruit-i2c-lcd-0.1.0.tgz' },
+41 silly install resolved     maintainers: [ [Object] ],
+41 silly install resolved     directories: {},
+41 silly install resolved     _resolved: 'https://registry.npmjs.org/adafruit-i2c-lcd/-/adafruit-i2c-lcd-0.1.0.tgz',
+41 silly install resolved     readme: 'ERROR: No README data found!' } ]
+42 info install adafruit-i2c-lcd@0.1.0 into /Users/Arthur/Code/BuildBrighton/acs-pi
+43 info installOne adafruit-i2c-lcd@0.1.0
+44 verbose installOne of adafruit-i2c-lcd to /Users/Arthur/Code/BuildBrighton/acs-pi not in flight; installing
+45 verbose lock using /Users/Arthur/.npm/_locks/adafruit-i2c-lcd-2bb22289ac30d96f.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+46 silly install write writing adafruit-i2c-lcd 0.1.0 to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+47 verbose unbuild node_modules/adafruit-i2c-lcd
+48 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+49 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+50 verbose tar unpack /Users/Arthur/.npm/adafruit-i2c-lcd/0.1.0/package.tgz
+51 verbose tar unpacking to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+52 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd is being purged
+53 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+54 silly gunzTarPerm modes [ '755', '644' ]
+55 silly gunzTarPerm extractEntry package.json
+56 silly gunzTarPerm extractEntry .npmignore
+57 silly gunzTarPerm extractEntry README.md
+58 silly gunzTarPerm extractEntry LICENSE
+59 silly gunzTarPerm extractEntry lib/adafruit_i2c_lcd.js
+60 silly gunzTarPerm extractEntry lib/index.js
+61 silly gunzTarPerm extractEntry lib/.gitkeep
+62 verbose write writing to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/package.json
+63 info preinstall adafruit-i2c-lcd@0.1.0
+64 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/package.json
+65 silly prepareForInstallMany adding i2c@0.2.1 from adafruit-i2c-lcd dependencies
+66 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/package.json
+67 silly cache add args [ 'i2c@0.2.1', null ]
+68 verbose cache add spec i2c@0.2.1
+69 silly cache add parsed spec { raw: 'i2c@0.2.1',
+69 silly cache add   scope: null,
+69 silly cache add   name: 'i2c',
+69 silly cache add   rawSpec: '0.2.1',
+69 silly cache add   spec: '0.2.1',
+69 silly cache add   type: 'version' }
+70 silly addNamed i2c@0.2.1
+71 verbose addNamed "0.2.1" is a plain semver version for i2c
+72 silly mapToRegistry name i2c
+73 silly mapToRegistry using default registry
+74 silly mapToRegistry registry https://registry.npmjs.org/
+75 silly mapToRegistry uri https://registry.npmjs.org/i2c
+76 verbose addNameVersion registry:https://registry.npmjs.org/i2c not in flight; fetching
+77 verbose request uri https://registry.npmjs.org/i2c
+78 verbose request no auth needed
+79 info attempt registry request try #1 at 9:30:50 AM
+80 verbose request using bearer token for auth
+81 verbose etag "CLY0TF6FO9F6QU25LT9BZURXR"
+82 http request GET https://registry.npmjs.org/i2c
+83 http 304 https://registry.npmjs.org/i2c
+84 silly get cb [ 304,
+84 silly get   { 'cache-control': 'max-age=60',
+84 silly get     'accept-ranges': 'bytes',
+84 silly get     date: 'Sat, 31 Oct 2015 09:30:52 GMT',
+84 silly get     via: '1.1 varnish',
+84 silly get     connection: 'keep-alive',
+84 silly get     'x-served-by': 'cache-ams4132-AMS',
+84 silly get     'x-cache': 'MISS',
+84 silly get     'x-cache-hits': '0',
+84 silly get     'x-timer': 'S1446283851.811707,VS0,VE687' } ]
+85 verbose etag https://registry.npmjs.org/i2c from cache
+86 verbose get saving i2c to /Users/Arthur/.npm/registry.npmjs.org/i2c/.cache.json
+87 silly cache afterAdd i2c@0.2.1
+88 verbose afterAdd /Users/Arthur/.npm/i2c/0.2.1/package/package.json not in flight; writing
+89 verbose afterAdd /Users/Arthur/.npm/i2c/0.2.1/package/package.json written
+90 silly install resolved [ { name: 'i2c',
+90 silly install resolved     version: '0.2.1',
+90 silly install resolved     description: 'Native bindings for i2c-dev. Plays well with Raspberry Pi and BeagleBone.',
+90 silly install resolved     main: 'main.js',
+90 silly install resolved     author: { name: 'Kelly Korevec' },
+90 silly install resolved     repository:
+90 silly install resolved      { type: 'git',
+90 silly install resolved        url: 'git+ssh://git@github.com/korevec/node-i2c.git' },
+90 silly install resolved     license: 'BSD',
+90 silly install resolved     dependencies:
+90 silly install resolved      { bindings: '1.2.1',
+90 silly install resolved        underscore: '1.8.2',
+90 silly install resolved        'coffee-script': '1.9.1',
+90 silly install resolved        repl: '0.1.3' },
+90 silly install resolved     engine: 'node >= 0.12.0',
+90 silly install resolved     scripts: { install: 'node-gyp rebuild' },
+90 silly install resolved     gypfile: true,
+90 silly install resolved     bugs: { url: 'https://github.com/korevec/node-i2c/issues' },
+90 silly install resolved     homepage: 'https://github.com/korevec/node-i2c',
+90 silly install resolved     _id: 'i2c@0.2.1',
+90 silly install resolved     dist:
+90 silly install resolved      { shasum: 'e5687031c60acf09aa7ea9d35221a9e9161e0abc',
+90 silly install resolved        tarball: 'http://registry.npmjs.org/i2c/-/i2c-0.2.1.tgz' },
+90 silly install resolved     _from: 'i2c@0.2.1',
+90 silly install resolved     _npmVersion: '1.3.14',
+90 silly install resolved     _npmUser: { name: 'kelly', email: 'korevec@gmail.com' },
+90 silly install resolved     maintainers: [ [Object] ],
+90 silly install resolved     directories: {},
+90 silly install resolved     _shasum: 'e5687031c60acf09aa7ea9d35221a9e9161e0abc',
+90 silly install resolved     _resolved: 'https://registry.npmjs.org/i2c/-/i2c-0.2.1.tgz',
+90 silly install resolved     readme: 'ERROR: No README data found!' } ]
+91 info install i2c@0.2.1 into /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+92 info installOne i2c@0.2.1
+93 verbose installOne of i2c to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd not in flight; installing
+94 verbose lock using /Users/Arthur/.npm/_locks/i2c-4082361445f2c51e.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+95 silly install write writing i2c 0.2.1 to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+96 verbose unbuild node_modules/adafruit-i2c-lcd/node_modules/i2c
+97 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+98 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+99 verbose tar unpack /Users/Arthur/.npm/i2c/0.2.1/package.tgz
+100 verbose tar unpacking to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+101 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c is being purged
+102 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+103 silly gunzTarPerm modes [ '755', '644' ]
+104 silly gunzTarPerm extractEntry package.json
+105 silly gunzTarPerm extractEntry .npmignore
+106 silly gunzTarPerm extractEntry README.md
+107 silly gunzTarPerm extractEntry LICENSE
+108 silly gunzTarPerm extractEntry main.js
+109 silly gunzTarPerm extractEntry binding.gyp
+110 silly gunzTarPerm extractEntry examples/accelerometer/accel.coffee
+111 silly gunzTarPerm extractEntry examples/blinkm/blinkm.coffee
+112 silly gunzTarPerm extractEntry lib/i2c.coffee
+113 silly gunzTarPerm extractEntry src/i2c-dev.c
+114 silly gunzTarPerm extractEntry src/i2c-dev.h
+115 silly gunzTarPerm extractEntry src/i2c.cc
+116 verbose write writing to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/package.json
+117 info preinstall i2c@0.2.1
+118 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/package.json
+119 silly prepareForInstallMany adding bindings@1.2.1 from i2c dependencies
+120 silly prepareForInstallMany adding underscore@1.8.2 from i2c dependencies
+121 silly prepareForInstallMany adding coffee-script@1.9.1 from i2c dependencies
+122 silly prepareForInstallMany adding repl@0.1.3 from i2c dependencies
+123 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/package.json
+124 silly cache add args [ 'bindings@1.2.1', null ]
+125 verbose cache add spec bindings@1.2.1
+126 silly cache add args [ 'underscore@1.8.2', null ]
+127 verbose cache add spec underscore@1.8.2
+128 silly cache add parsed spec { raw: 'bindings@1.2.1',
+128 silly cache add   scope: null,
+128 silly cache add   name: 'bindings',
+128 silly cache add   rawSpec: '1.2.1',
+128 silly cache add   spec: '1.2.1',
+128 silly cache add   type: 'version' }
+129 silly addNamed bindings@1.2.1
+130 verbose addNamed "1.2.1" is a plain semver version for bindings
+131 silly mapToRegistry name bindings
+132 silly mapToRegistry using default registry
+133 silly mapToRegistry registry https://registry.npmjs.org/
+134 silly mapToRegistry uri https://registry.npmjs.org/bindings
+135 verbose addNameVersion registry:https://registry.npmjs.org/bindings not in flight; fetching
+136 silly cache add parsed spec { raw: 'underscore@1.8.2',
+136 silly cache add   scope: null,
+136 silly cache add   name: 'underscore',
+136 silly cache add   rawSpec: '1.8.2',
+136 silly cache add   spec: '1.8.2',
+136 silly cache add   type: 'version' }
+137 silly addNamed underscore@1.8.2
+138 verbose addNamed "1.8.2" is a plain semver version for underscore
+139 silly mapToRegistry name underscore
+140 silly mapToRegistry using default registry
+141 silly mapToRegistry registry https://registry.npmjs.org/
+142 silly mapToRegistry uri https://registry.npmjs.org/underscore
+143 verbose addNameVersion registry:https://registry.npmjs.org/underscore not in flight; fetching
+144 silly cache add args [ 'coffee-script@1.9.1', null ]
+145 verbose cache add spec coffee-script@1.9.1
+146 silly cache add parsed spec { raw: 'coffee-script@1.9.1',
+146 silly cache add   scope: null,
+146 silly cache add   name: 'coffee-script',
+146 silly cache add   rawSpec: '1.9.1',
+146 silly cache add   spec: '1.9.1',
+146 silly cache add   type: 'version' }
+147 silly addNamed coffee-script@1.9.1
+148 verbose addNamed "1.9.1" is a plain semver version for coffee-script
+149 silly mapToRegistry name coffee-script
+150 silly mapToRegistry using default registry
+151 silly mapToRegistry registry https://registry.npmjs.org/
+152 silly mapToRegistry uri https://registry.npmjs.org/coffee-script
+153 verbose addNameVersion registry:https://registry.npmjs.org/coffee-script not in flight; fetching
+154 silly cache add args [ 'repl@0.1.3', null ]
+155 verbose cache add spec repl@0.1.3
+156 silly cache add parsed spec { raw: 'repl@0.1.3',
+156 silly cache add   scope: null,
+156 silly cache add   name: 'repl',
+156 silly cache add   rawSpec: '0.1.3',
+156 silly cache add   spec: '0.1.3',
+156 silly cache add   type: 'version' }
+157 silly addNamed repl@0.1.3
+158 verbose addNamed "0.1.3" is a plain semver version for repl
+159 silly mapToRegistry name repl
+160 silly mapToRegistry using default registry
+161 silly mapToRegistry registry https://registry.npmjs.org/
+162 silly mapToRegistry uri https://registry.npmjs.org/repl
+163 verbose addNameVersion registry:https://registry.npmjs.org/repl not in flight; fetching
+164 verbose request uri https://registry.npmjs.org/bindings
+165 verbose request no auth needed
+166 info attempt registry request try #1 at 9:30:52 AM
+167 verbose request using bearer token for auth
+168 verbose etag "9T1GC8LK3NF0OJU9OPHCFIKS3"
+169 http request GET https://registry.npmjs.org/bindings
+170 verbose request uri https://registry.npmjs.org/underscore
+171 verbose request no auth needed
+172 info attempt registry request try #1 at 9:30:52 AM
+173 verbose request using bearer token for auth
+174 verbose etag "1V9ZGVR164SDT6POEE8U1F6M0"
+175 http request GET https://registry.npmjs.org/underscore
+176 verbose request uri https://registry.npmjs.org/coffee-script
+177 verbose request no auth needed
+178 info attempt registry request try #1 at 9:30:52 AM
+179 verbose request using bearer token for auth
+180 verbose etag "3BT3MRLZ5E8Z2H8RVM90D8M67"
+181 http request GET https://registry.npmjs.org/coffee-script
+182 verbose request uri https://registry.npmjs.org/repl
+183 verbose request no auth needed
+184 info attempt registry request try #1 at 9:30:52 AM
+185 verbose request using bearer token for auth
+186 verbose etag "B2YIZ9SHIPM70CR4ZZI8WJ13O"
+187 http request GET https://registry.npmjs.org/repl
+188 http 304 https://registry.npmjs.org/underscore
+189 silly get cb [ 304,
+189 silly get   { 'cache-control': 'max-age=60',
+189 silly get     'accept-ranges': 'bytes',
+189 silly get     date: 'Sat, 31 Oct 2015 09:30:53 GMT',
+189 silly get     via: '1.1 varnish',
+189 silly get     connection: 'keep-alive',
+189 silly get     'x-served-by': 'cache-ams4138-AMS',
+189 silly get     'x-cache': 'MISS',
+189 silly get     'x-cache-hits': '0',
+189 silly get     'x-timer': 'S1446283853.448634,VS0,VE94' } ]
+190 verbose etag https://registry.npmjs.org/underscore from cache
+191 verbose get saving underscore to /Users/Arthur/.npm/registry.npmjs.org/underscore/.cache.json
+192 silly cache afterAdd underscore@1.8.2
+193 verbose afterAdd /Users/Arthur/.npm/underscore/1.8.2/package/package.json not in flight; writing
+194 verbose afterAdd /Users/Arthur/.npm/underscore/1.8.2/package/package.json written
+195 http 304 https://registry.npmjs.org/bindings
+196 silly get cb [ 304,
+196 silly get   { 'cache-control': 'max-age=60',
+196 silly get     'accept-ranges': 'bytes',
+196 silly get     date: 'Sat, 31 Oct 2015 09:30:53 GMT',
+196 silly get     via: '1.1 varnish',
+196 silly get     connection: 'keep-alive',
+196 silly get     'x-served-by': 'cache-ams4144-AMS',
+196 silly get     'x-cache': 'MISS',
+196 silly get     'x-cache-hits': '0',
+196 silly get     'x-timer': 'S1446283853.482117,VS0,VE96' } ]
+197 verbose etag https://registry.npmjs.org/bindings from cache
+198 verbose get saving bindings to /Users/Arthur/.npm/registry.npmjs.org/bindings/.cache.json
+199 silly cache afterAdd bindings@1.2.1
+200 verbose afterAdd /Users/Arthur/.npm/bindings/1.2.1/package/package.json not in flight; writing
+201 verbose afterAdd /Users/Arthur/.npm/bindings/1.2.1/package/package.json written
+202 http 304 https://registry.npmjs.org/coffee-script
+203 silly get cb [ 304,
+203 silly get   { 'cache-control': 'max-age=60',
+203 silly get     'accept-ranges': 'bytes',
+203 silly get     date: 'Sat, 31 Oct 2015 09:30:53 GMT',
+203 silly get     via: '1.1 varnish',
+203 silly get     connection: 'keep-alive',
+203 silly get     'x-served-by': 'cache-ams4145-AMS',
+203 silly get     'x-cache': 'MISS',
+203 silly get     'x-cache-hits': '0',
+203 silly get     'x-timer': 'S1446283853.454727,VS0,VE377' } ]
+204 verbose etag https://registry.npmjs.org/coffee-script from cache
+205 verbose get saving coffee-script to /Users/Arthur/.npm/registry.npmjs.org/coffee-script/.cache.json
+206 http 304 https://registry.npmjs.org/repl
+207 silly get cb [ 304,
+207 silly get   { 'cache-control': 'max-age=60',
+207 silly get     'accept-ranges': 'bytes',
+207 silly get     date: 'Sat, 31 Oct 2015 09:30:53 GMT',
+207 silly get     via: '1.1 varnish',
+207 silly get     connection: 'keep-alive',
+207 silly get     'x-served-by': 'cache-ams4124-AMS',
+207 silly get     'x-cache': 'MISS',
+207 silly get     'x-cache-hits': '0',
+207 silly get     'x-timer': 'S1446283853.448745,VS0,VE387' } ]
+208 verbose etag https://registry.npmjs.org/repl from cache
+209 verbose get saving repl to /Users/Arthur/.npm/registry.npmjs.org/repl/.cache.json
+210 silly cache afterAdd coffee-script@1.9.1
+211 verbose afterAdd /Users/Arthur/.npm/coffee-script/1.9.1/package/package.json not in flight; writing
+212 verbose afterAdd /Users/Arthur/.npm/coffee-script/1.9.1/package/package.json written
+213 silly cache afterAdd repl@0.1.3
+214 verbose afterAdd /Users/Arthur/.npm/repl/0.1.3/package/package.json not in flight; writing
+215 verbose afterAdd /Users/Arthur/.npm/repl/0.1.3/package/package.json written
+216 silly install resolved [ { name: 'underscore',
+216 silly install resolved     description: 'JavaScript\'s functional programming helper library.',
+216 silly install resolved     homepage: 'http://underscorejs.org',
+216 silly install resolved     keywords: [ 'util', 'functional', 'server', 'client', 'browser' ],
+216 silly install resolved     author: { name: 'Jeremy Ashkenas', email: 'jeremy@documentcloud.org' },
+216 silly install resolved     repository:
+216 silly install resolved      { type: 'git',
+216 silly install resolved        url: 'git://github.com/jashkenas/underscore.git' },
+216 silly install resolved     main: 'underscore.js',
+216 silly install resolved     version: '1.8.2',
+216 silly install resolved     devDependencies:
+216 silly install resolved      { docco: '*',
+216 silly install resolved        eslint: '0.6.x',
+216 silly install resolved        karma: '~0.12.31',
+216 silly install resolved        'karma-qunit': '~0.1.4',
+216 silly install resolved        'qunit-cli': '~0.2.0',
+216 silly install resolved        'uglify-js': '2.4.x' },
+216 silly install resolved     scripts:
+216 silly install resolved      { test: 'npm run test-node && npm run lint',
+216 silly install resolved        lint: 'eslint underscore.js test/*.js',
+216 silly install resolved        'test-node': 'qunit-cli test/*.js',
+216 silly install resolved        'test-browser': 'npm i karma-phantomjs-launcher && ./node_modules/karma/bin/karma start',
+216 silly install resolved        build: 'uglifyjs underscore.js -c "evaluate=false" --comments "/    .*/" -m --source-map underscore-min.map -o underscore-min.js',
+216 silly install resolved        doc: 'docco underscore.js' },
+216 silly install resolved     license: 'MIT',
+216 silly install resolved     files:
+216 silly install resolved      [ 'underscore.js',
+216 silly install resolved        'underscore-min.js',
+216 silly install resolved        'underscore-min.map',
+216 silly install resolved        'LICENSE' ],
+216 silly install resolved     gitHead: '19db749b190a7cb5a8b7ab1aab42c0e9dc517250',
+216 silly install resolved     bugs: { url: 'https://github.com/jashkenas/underscore/issues' },
+216 silly install resolved     _id: 'underscore@1.8.2',
+216 silly install resolved     _shasum: '64df2eb590899de950782f3735190ba42ebf311d',
+216 silly install resolved     _from: 'underscore@1.8.2',
+216 silly install resolved     _npmVersion: '1.4.28',
+216 silly install resolved     _npmUser: { name: 'jashkenas', email: 'jashkenas@gmail.com' },
+216 silly install resolved     maintainers: [ [Object] ],
+216 silly install resolved     dist:
+216 silly install resolved      { shasum: '64df2eb590899de950782f3735190ba42ebf311d',
+216 silly install resolved        tarball: 'http://registry.npmjs.org/underscore/-/underscore-1.8.2.tgz' },
+216 silly install resolved     directories: {},
+216 silly install resolved     _resolved: 'https://registry.npmjs.org/underscore/-/underscore-1.8.2.tgz',
+216 silly install resolved     readme: 'ERROR: No README data found!' },
+216 silly install resolved   { name: 'bindings',
+216 silly install resolved     description: 'Helper module for loading your native module\'s .node file',
+216 silly install resolved     keywords: [ 'native', 'addon', 'bindings', 'gyp', 'waf', 'c', 'c++' ],
+216 silly install resolved     version: '1.2.1',
+216 silly install resolved     author:
+216 silly install resolved      { name: 'Nathan Rajlich',
+216 silly install resolved        email: 'nathan@tootallnate.net',
+216 silly install resolved        url: 'http://tootallnate.net' },
+216 silly install resolved     repository:
+216 silly install resolved      { type: 'git',
+216 silly install resolved        url: 'git://github.com/TooTallNate/node-bindings.git' },
+216 silly install resolved     main: './bindings.js',
+216 silly install resolved     bugs: { url: 'https://github.com/TooTallNate/node-bindings/issues' },
+216 silly install resolved     homepage: 'https://github.com/TooTallNate/node-bindings',
+216 silly install resolved     license: 'MIT',
+216 silly install resolved     gitHead: 'e404152ee27f8478ccbc7122ee051246e8e5ec02',
+216 silly install resolved     _id: 'bindings@1.2.1',
+216 silly install resolved     scripts: {},
+216 silly install resolved     _shasum: '14ad6113812d2d37d72e67b4cacb4bb726505f11',
+216 silly install resolved     _from: 'bindings@1.2.1',
+216 silly install resolved     _npmVersion: '1.4.14',
+216 silly install resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+216 silly install resolved     maintainers: [ [Object], [Object] ],
+216 silly install resolved     dist:
+216 silly install resolved      { shasum: '14ad6113812d2d37d72e67b4cacb4bb726505f11',
+216 silly install resolved        tarball: 'http://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz' },
+216 silly install resolved     directories: {},
+216 silly install resolved     _resolved: 'https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz',
+216 silly install resolved     readme: 'ERROR: No README data found!' },
+216 silly install resolved   { name: 'coffee-script',
+216 silly install resolved     description: 'Unfancy JavaScript',
+216 silly install resolved     keywords: [ 'javascript', 'language', 'coffeescript', 'compiler' ],
+216 silly install resolved     author: { name: 'Jeremy Ashkenas' },
+216 silly install resolved     version: '1.9.1',
+216 silly install resolved     license: 'MIT',
+216 silly install resolved     engines: { node: '>=0.8.0' },
+216 silly install resolved     directories: { lib: './lib/coffee-script' },
+216 silly install resolved     main: './lib/coffee-script/coffee-script',
+216 silly install resolved     bin: { coffee: './bin/coffee', cake: './bin/cake' },
+216 silly install resolved     preferGlobal: true,
+216 silly install resolved     scripts:
+216 silly install resolved      { test: 'node ./bin/cake test',
+216 silly install resolved        'test-harmony': 'node --harmony ./bin/cake test' },
+216 silly install resolved     homepage: 'http://coffeescript.org',
+216 silly install resolved     bugs: { url: 'https://github.com/jashkenas/coffeescript/issues' },
+216 silly install resolved     repository:
+216 silly install resolved      { type: 'git',
+216 silly install resolved        url: 'git://github.com/jashkenas/coffeescript.git' },
+216 silly install resolved     devDependencies:
+216 silly install resolved      { 'uglify-js': '~2.2',
+216 silly install resolved        jison: '>=0.2.0',
+216 silly install resolved        'highlight.js': '~8.0.0',
+216 silly install resolved        underscore: '~1.5.2',
+216 silly install resolved        docco: '~0.7.0' },
+216 silly install resolved     gitHead: '533ad8afe920b2dbf64ffb00efda45648242cc24',
+216 silly install resolved     _id: 'coffee-script@1.9.1',
+216 silly install resolved     _shasum: 'c458d02200f460d064a79cb6ab1ee6e2c9ca1c31',
+216 silly install resolved     _from: 'coffee-script@1.9.1',
+216 silly install resolved     _npmVersion: '1.4.28',
+216 silly install resolved     _npmUser: { name: 'jashkenas', email: 'jashkenas@gmail.com' },
+216 silly install resolved     maintainers: [ [Object], [Object] ],
+216 silly install resolved     dist:
+216 silly install resolved      { shasum: 'c458d02200f460d064a79cb6ab1ee6e2c9ca1c31',
+216 silly install resolved        tarball: 'http://registry.npmjs.org/coffee-script/-/coffee-script-1.9.1.tgz' },
+216 silly install resolved     _resolved: 'https://registry.npmjs.org/coffee-script/-/coffee-script-1.9.1.tgz',
+216 silly install resolved     readme: 'ERROR: No README data found!' },
+216 silly install resolved   { name: 'repl',
+216 silly install resolved     author: { name: 'Firejune', url: 'http://firejune.com/' },
+216 silly install resolved     version: '0.1.3',
+216 silly install resolved     description: 'A simple fast template libray.',
+216 silly install resolved     homepage: 'http://github.com/firejune/repl',
+216 silly install resolved     keywords: [ 'template', 'engine', 'repl' ],
+216 silly install resolved     main: 'lib/template',
+216 silly install resolved     directories: { lib: 'lib' },
+216 silly install resolved     repository: { type: 'git', url: 'git://github.com/firejune/repl.git' },
+216 silly install resolved     licenses: [ [Object] ],
+216 silly install resolved     bugs: { url: 'http://github.com/firejune/repl/issues' },
+216 silly install resolved     engines: { node: '>= 0.4.0' },
+216 silly install resolved     _npmUser: { name: 'firejune', email: 'to@firejune.com' },
+216 silly install resolved     _id: 'repl@0.1.3',
+216 silly install resolved     dependencies: {},
+216 silly install resolved     devDependencies: {},
+216 silly install resolved     _engineSupported: true,
+216 silly install resolved     _npmVersion: '1.0.94',
+216 silly install resolved     _nodeVersion: 'v0.4.12',
+216 silly install resolved     _defaultsLoaded: true,
+216 silly install resolved     dist:
+216 silly install resolved      { shasum: '2f05d42b0c88b43d05ccbda10ed14aeff5699b60',
+216 silly install resolved        tarball: 'http://registry.npmjs.org/repl/-/repl-0.1.3.tgz' },
+216 silly install resolved     maintainers: [ [Object] ],
+216 silly install resolved     _shasum: '2f05d42b0c88b43d05ccbda10ed14aeff5699b60',
+216 silly install resolved     _resolved: 'https://registry.npmjs.org/repl/-/repl-0.1.3.tgz',
+216 silly install resolved     _from: 'repl@0.1.3',
+216 silly install resolved     readme: 'ERROR: No README data found!' } ]
+217 info install underscore@1.8.2 into /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+218 info install bindings@1.2.1 into /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+219 info install coffee-script@1.9.1 into /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+220 info install repl@0.1.3 into /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+221 info installOne underscore@1.8.2
+222 verbose installOne of underscore to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c not in flight; installing
+223 info installOne bindings@1.2.1
+224 verbose installOne of bindings to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c not in flight; installing
+225 info installOne coffee-script@1.9.1
+226 verbose installOne of coffee-script to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c not in flight; installing
+227 info installOne repl@0.1.3
+228 verbose installOne of repl to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c not in flight; installing
+229 verbose lock using /Users/Arthur/.npm/_locks/underscore-51dabe38868949e2.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+230 silly install write writing underscore 1.8.2 to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+231 verbose lock using /Users/Arthur/.npm/_locks/bindings-3e02d8410c937d8a.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+232 silly install write writing bindings 1.2.1 to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+233 verbose unbuild node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+234 verbose lock using /Users/Arthur/.npm/_locks/coffee-script-e2470620e8dbb72f.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+235 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+236 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+237 verbose unbuild node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+238 silly install write writing coffee-script 1.9.1 to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+239 verbose tar unpack /Users/Arthur/.npm/underscore/1.8.2/package.tgz
+240 verbose tar unpacking to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+241 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore is being purged
+242 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+243 verbose lock using /Users/Arthur/.npm/_locks/repl-ed2952f5e02f8c19.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+244 silly gunzTarPerm modes [ '755', '644' ]
+245 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+246 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+247 silly install write writing repl 0.1.3 to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+248 verbose tar unpack /Users/Arthur/.npm/bindings/1.2.1/package.tgz
+249 verbose tar unpacking to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+250 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings is being purged
+251 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+252 silly gunzTarPerm modes [ '755', '644' ]
+253 verbose unbuild node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+254 silly gunzTarPerm extractEntry package.json
+255 verbose unbuild node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+256 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+257 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+258 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+259 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+260 verbose tar unpack /Users/Arthur/.npm/coffee-script/1.9.1/package.tgz
+261 verbose tar unpacking to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+262 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script is being purged
+263 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+264 verbose tar unpack /Users/Arthur/.npm/repl/0.1.3/package.tgz
+265 verbose tar unpacking to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+266 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl is being purged
+267 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+268 silly gunzTarPerm extractEntry package.json
+269 silly gunzTarPerm modes [ '755', '644' ]
+270 silly gunzTarPerm extractEntry README.md
+271 silly gunzTarPerm extractEntry LICENSE
+272 silly gunzTarPerm modes [ '755', '644' ]
+273 silly gunzTarPerm extractEntry README.md
+274 silly gunzTarPerm extractEntry bindings.js
+275 silly gunzTarPerm extractEntry package.json
+276 silly gunzTarPerm extractEntry test.js
+277 silly gunzTarPerm extractEntry .npmignore
+278 silly gunzTarPerm extractEntry README
+279 silly gunzTarPerm extractEntry underscore.js
+280 silly gunzTarPerm extractEntry underscore-min.js
+281 silly gunzTarPerm extractEntry underscore-min.map
+282 silly gunzTarPerm extractEntry README.md
+283 silly gunzTarPerm extractEntry package.json
+284 silly gunzTarPerm extractEntry README.md
+285 silly gunzTarPerm extractEntry index.js
+286 silly gunzTarPerm extractEntry lib/repl.js
+287 silly gunzTarPerm extractEntry LICENSE
+288 silly gunzTarPerm extractEntry register.js
+289 silly gunzTarPerm extractEntry repl.js
+290 silly gunzTarPerm extractEntry bin/cake
+291 silly gunzTarPerm extractEntry bin/coffee
+292 verbose write writing to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings/package.json
+293 silly gunzTarPerm extractEntry bower.json
+294 silly gunzTarPerm extractEntry lib/coffee-script/browser.js
+295 info preinstall bindings@1.2.1
+296 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings/package.json
+297 silly gunzTarPerm extractEntry lib/coffee-script/grammar.js
+298 silly gunzTarPerm extractEntry lib/coffee-script/helpers.js
+299 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings/package.json
+300 verbose write writing to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl/package.json
+301 silly install resolved []
+302 verbose about to build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+303 info build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+304 silly gunzTarPerm extractEntry lib/coffee-script/index.js
+305 silly gunzTarPerm extractEntry lib/coffee-script/lexer.js
+306 info preinstall repl@0.1.3
+307 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl/package.json
+308 info linkStuff bindings@1.2.1
+309 silly linkStuff bindings@1.2.1 has /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules as its parent node_modules
+310 silly gunzTarPerm extractEntry lib/coffee-script/command.js
+311 silly gunzTarPerm extractEntry lib/coffee-script/optparse.js
+312 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl/package.json
+313 silly install resolved []
+314 verbose about to build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+315 info build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+316 verbose linkBins bindings@1.2.1
+317 verbose linkMans bindings@1.2.1
+318 verbose rebuildBundles bindings@1.2.1
+319 info install bindings@1.2.1
+320 info postinstall bindings@1.2.1
+321 silly gunzTarPerm extractEntry lib/coffee-script/parser.js
+322 silly gunzTarPerm extractEntry lib/coffee-script/register.js
+323 info linkStuff repl@0.1.3
+324 silly linkStuff repl@0.1.3 has /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules as its parent node_modules
+325 verbose unlock done using /Users/Arthur/.npm/_locks/bindings-3e02d8410c937d8a.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/bindings
+326 silly gunzTarPerm extractEntry lib/coffee-script/repl.js
+327 silly gunzTarPerm extractEntry lib/coffee-script/rewriter.js
+328 verbose linkBins repl@0.1.3
+329 verbose linkMans repl@0.1.3
+330 verbose rebuildBundles repl@0.1.3
+331 info install repl@0.1.3
+332 info postinstall repl@0.1.3
+333 verbose unlock done using /Users/Arthur/.npm/_locks/repl-ed2952f5e02f8c19.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/repl
+334 silly gunzTarPerm extractEntry lib/coffee-script/coffee-script.js
+335 silly gunzTarPerm extractEntry lib/coffee-script/scope.js
+336 silly gunzTarPerm extractEntry lib/coffee-script/cake.js
+337 silly gunzTarPerm extractEntry lib/coffee-script/sourcemap.js
+338 silly gunzTarPerm extractEntry lib/coffee-script/nodes.js
+339 silly gunzTarPerm extractEntry CNAME
+340 silly gunzTarPerm extractEntry CONTRIBUTING.md
+341 verbose write writing to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore/package.json
+342 info preinstall underscore@1.8.2
+343 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore/package.json
+344 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore/package.json
+345 silly install resolved []
+346 verbose about to build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+347 info build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+348 info linkStuff underscore@1.8.2
+349 silly linkStuff underscore@1.8.2 has /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules as its parent node_modules
+350 verbose linkBins underscore@1.8.2
+351 verbose linkMans underscore@1.8.2
+352 verbose rebuildBundles underscore@1.8.2
+353 info install underscore@1.8.2
+354 info postinstall underscore@1.8.2
+355 verbose unlock done using /Users/Arthur/.npm/_locks/underscore-51dabe38868949e2.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/underscore
+356 verbose write writing to /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script/package.json
+357 info preinstall coffee-script@1.9.1
+358 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script/package.json
+359 verbose readDependencies loading dependencies from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script/package.json
+360 silly install resolved []
+361 verbose about to build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+362 info build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+363 info linkStuff coffee-script@1.9.1
+364 silly linkStuff coffee-script@1.9.1 has /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules as its parent node_modules
+365 verbose linkBins coffee-script@1.9.1
+366 verbose link bins [ { coffee: './bin/coffee', cake: './bin/cake' },
+366 verbose link bins   '/Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/.bin',
+366 verbose link bins   false ]
+367 verbose linkMans coffee-script@1.9.1
+368 verbose rebuildBundles coffee-script@1.9.1
+369 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/.bin/coffee is being purged
+370 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/.bin/coffee
+371 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/.bin/cake is being purged
+372 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/.bin/cake
+373 info install coffee-script@1.9.1
+374 info postinstall coffee-script@1.9.1
+375 verbose unlock done using /Users/Arthur/.npm/_locks/coffee-script-e2470620e8dbb72f.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c/node_modules/coffee-script
+376 verbose about to build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+377 info build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+378 info linkStuff i2c@0.2.1
+379 silly linkStuff i2c@0.2.1 has /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules as its parent node_modules
+380 verbose linkBins i2c@0.2.1
+381 verbose linkMans i2c@0.2.1
+382 verbose rebuildBundles i2c@0.2.1
+383 verbose rebuildBundles [ '.bin', 'bindings', 'coffee-script', 'repl', 'underscore' ]
+384 info install i2c@0.2.1
+385 verbose unsafe-perm in lifecycle true
+386 info i2c@0.2.1 Failed to exec install script
+387 verbose unlock done using /Users/Arthur/.npm/_locks/i2c-4082361445f2c51e.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+388 verbose about to build /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+389 verbose unlock done using /Users/Arthur/.npm/_locks/adafruit-i2c-lcd-2bb22289ac30d96f.lock for /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+390 verbose stack Error: i2c@0.2.1 install: `node-gyp rebuild`
+390 verbose stack Exit status 1
+390 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
+390 verbose stack     at EventEmitter.emit (events.js:110:17)
+390 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+390 verbose stack     at ChildProcess.emit (events.js:110:17)
+390 verbose stack     at maybeClose (child_process.js:1015:16)
+390 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1087:5)
+391 verbose pkgid i2c@0.2.1
+392 verbose cwd /Users/Arthur/Code/BuildBrighton/acs-pi
+393 error Darwin 14.5.0
+394 error argv "node" "/usr/local/bin/npm" "install" "adafruit-i2c-lcd" "--save"
+395 error node v0.12.2
+396 error npm  v2.9.0
+397 error code ELIFECYCLE
+398 error i2c@0.2.1 install: `node-gyp rebuild`
+398 error Exit status 1
+399 error Failed at the i2c@0.2.1 install script 'node-gyp rebuild'.
+399 error This is most likely a problem with the i2c package,
+399 error not with npm itself.
+399 error Tell the author that this fails on your system:
+399 error     node-gyp rebuild
+399 error You can get their info via:
+399 error     npm owner ls i2c
+399 error There is likely additional logging output above.
+400 verbose exit [ 1, true ]
+401 verbose unbuild node_modules/adafruit-i2c-lcd/node_modules/i2c
+402 info preuninstall i2c@0.2.1
+403 info uninstall i2c@0.2.1
+404 verbose unbuild rmStuff i2c@0.2.1 from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules
+405 verbose unbuild rmStuff in /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules
+406 info postuninstall i2c@0.2.1
+407 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+408 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+409 silly vacuum-fs purging /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules/i2c
+410 silly vacuum-fs removing /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd/node_modules
+411 silly vacuum-fs quitting because other entries in /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+412 verbose unbuild node_modules/adafruit-i2c-lcd
+413 info preuninstall adafruit-i2c-lcd@0.1.0
+414 info uninstall adafruit-i2c-lcd@0.1.0
+415 verbose unbuild rmStuff adafruit-i2c-lcd@0.1.0 from /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules
+416 info postuninstall adafruit-i2c-lcd@0.1.0
+417 silly gentlyRm /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd is being purged from base /Users/Arthur/Code/BuildBrighton/acs-pi
+418 verbose gentlyRm don't care about contents; nuking /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+419 silly vacuum-fs purging /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules/adafruit-i2c-lcd
+420 silly vacuum-fs quitting because other entries in /Users/Arthur/Code/BuildBrighton/acs-pi/node_modules
