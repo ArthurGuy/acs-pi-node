@@ -6,7 +6,8 @@
   "dependencies": {
     "pouchdb": "^5.0.0",
     "request": "^2.55.0",
-    "rpi-gpio": "^0.7.0"
+    "rpi-gpio": "^0.7.0",
+    "adafruit-i2c-lcd": "^0.1.0"
   },
   "engines": {
     "node": "0.10.36"

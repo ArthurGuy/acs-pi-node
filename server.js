@@ -3,8 +3,8 @@ var request = require('request');
 var tty = require('tty');
 var fs = require('fs');
 
-//var lcdplate = require('adafruit-i2c-lcd').plate;
-//var lcd = new lcdplate('/dev/i2c-1', 0x20);
+var lcdplate = require('adafruit-i2c-lcd').plate;
+var lcd = new lcdplate('/dev/i2c-0', 0x20);
 
 var PouchDB = require('pouchdb');
 var db = new PouchDB('bb_members');
@@ -54,8 +54,8 @@ function init() {
         console.error(error);
     });
 
-    //lcd.backlight(lcd.colors.ON);
-    //lcd.message('BBMS ACS Pi Node');
+    lcd.backlight(lcd.colors.ON);
+    lcd.message('BBMS ACS Pi Node');
 
 }
 
