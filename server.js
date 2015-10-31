@@ -204,24 +204,14 @@ function sendBoot() {
 
 function lookupTag(tagId) {
     console.log('Looking up tag', tagId);
-    request.post(
-        'https://bbms.buildbrighton.com/acs', {
-            json: {
-                device: 'pi-node-test',
-                service: 'status',
-                message: 'lookup',
-                tag: tagId,
-                time: Math.floor(Date.now() / 1000)
-            }
-        },
-        function (error, response, body) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Tag lookup sent', body);
-            }
-        }
-    );
+    request
+        .get('https://bbms.buildbrighton.com/acs/status/'+tagId)
+        .on('response', function(response) {
+            console.log('Tag lookup sent', response);
+        })
+        .on('error', function(error) {
+            console.log(error);
+        });
 }
 
 function pad(n, width, z) {
