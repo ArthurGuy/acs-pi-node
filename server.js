@@ -29,12 +29,19 @@ saveRecord('abcdefg', {name:'John Doe'});
 
 init();
 
-monitorKeyboard();
+//monitorKeyboard();
 
-//lookupTag('00005AAA5C');
+sendHeartBeat();
 
 
 function init() {
+    baseRequest = request.defaults({
+        headers: {
+            Accept: 'application/json',
+            ApiKey: 'my-token'
+        }
+    });
+
     sendBoot();
     setInterval(sendHeartBeat, 60000);
 
@@ -42,13 +49,6 @@ function init() {
         console.log('Local DB Records:', result.doc_count);
     }).catch(function (error) {
         console.error(error);
-    });
-
-    baseRequest = request.defaults({
-        headers: {
-            Accept: 'application/json',
-            ApiKey: 'my-token'
-        }
     });
 
 }
@@ -175,36 +175,26 @@ function findRecord(tagId) {
 }
 
 function sendHeartBeat() {
-    request.post(
-        'https://bbms.buildbrighton.com/acs', {
-            json: {
-                device: 'pi-node-test',
-                service: 'status',
-                message: 'heartbeat',
-                time: Math.floor(Date.now() / 1000)
-            }
-        },
+    baseRequest.post(
+        'https://bbms.buildbrighton.com/acs/node/heartbeat', {},
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Heartbeat sent');
+            } else {
+                console.log('Error sending heartbeat message', response.statusCode, response.body);
             }
         }
     );
 }
 function sendBoot() {
-    request.post(
-        'https://bbms.buildbrighton.com/acs', {
-            json: {
-                device: 'pi-node-test',
-                service: 'status',
-                message: 'boot',
-                time: Math.floor(Date.now() / 1000)
-            }
-        },
+    baseRequest.post(
+        'https://bbms.buildbrighton.com/acs/node/boot', {},
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 //console.log(body);
                 console.log('Boot message sent');
+            } else {
+                console.log('Error sending boot message', response.statusCode, response.body);
             }
         }
     );
@@ -218,7 +208,7 @@ function lookupTag(tagId) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
             } else {
-                console.log('Error', response.body);
+                console.log('Error', response.statusCode, response.body);
             }
         });
 }
