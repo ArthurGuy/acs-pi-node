@@ -44,7 +44,7 @@ function init() {
     baseRequest = request.defaults({
         headers: {
             Accept: 'application/json',
-            ApiKey: 'pi-test-2'
+            ApiKey: 'poi5wbcrnufas'
         }
     });
 
@@ -68,7 +68,7 @@ function monitorKeyboard() {
     if (process.env.DEVICE_STREAM) {
         device = process.env.DEVICE_STREAM;
     } else {
-        device = "/dev/input/by-id/usb-Sycreader_RFID_Technology_Co.__Ltd_SYC_ID_IC_USB_Reader_08FF20140315-event-kbd";
+        device = "/dev/tty";
     }
     ///dev/hidraw0
     ///dev/input/event0
