@@ -84,6 +84,7 @@ function monitorKeyboard() {
 
     //local
     if (1) {
+        var buffer = new Buffer(16);
         fs.open(device, 'r', function (err, fd) {
             while (true) {
                 fs.readSync(fd, buffer, 0, 16, null);
