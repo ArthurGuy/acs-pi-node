@@ -68,7 +68,7 @@ function monitorKeyboard() {
     if (process.env.DEVICE_STREAM) {
         device = process.env.DEVICE_STREAM;
     } else {
-        device = "/dev/stdin";
+        device = "/dev/input/by-id/usb-Sycreader_RFID_Technology_Co.__Ltd_SYC_ID_IC_USB_Reader_08FF20140315-event-kbd";
     }
     ///dev/hidraw0
     ///dev/input/event0
@@ -87,7 +87,7 @@ function monitorKeyboard() {
         input.setRawMode(true);
 
         input.on("data", function(chunk) {
-            //console.log("Raw:", chunk);
+            console.log("Raw:", chunk);
             //console.log("Raw 0:", chunk[0], '1:', chunk[1], '2:', chunk[2], '3:', chunk[3], '4:', chunk[4], '5:', chunk[5], '6:', chunk[6], '7:', chunk[7]);
 
             if (chunk[2] !== 0) {
