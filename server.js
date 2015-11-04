@@ -36,6 +36,9 @@ monitorKeyboard();
 
 sendHeartBeat();
 
+//var user = lookupTag('00005AAA5C');
+//console.log(user);
+
 
 function init() {
     baseRequest = request.defaults({
@@ -65,7 +68,7 @@ function monitorKeyboard() {
     if (process.env.DEVICE_STREAM) {
         device = process.env.DEVICE_STREAM;
     } else {
-        device = "/dev/hidraw0";
+        device = "/dev/tty";
     }
     ///dev/hidraw0
     ///dev/input/event0
@@ -77,7 +80,6 @@ function monitorKeyboard() {
     var tagNumberTotal = 0;
     var hexString = '';
     var hexChunkArray = [];
-    var checksum = '';
     var i = 0;
 
     try {
@@ -109,19 +111,17 @@ function monitorKeyboard() {
                     //console.log("Tag Number (decimal):", tagNumberTotal);
                     //console.log("Tag Number (hex):", tagNumberTotal.toString(16));
                     hexString = pad(tagNumberTotal.toString(16), 10).toUpperCase();
-                    console.log("Padded Tag Number (hex):", hexString);
+                    //console.log("Padded Tag Number (hex):", hexString);
 
                     hexChunkArray = hexString.match(/.{1,2}/g);
-                    console.log("Hex chunk array:", hexChunkArray);
-                    /*
-                    checksum = hexChunkArray[0];
-                    for (var x = 1; x < 5; x++) {
-                        checksum ^= hexChunkArray[x];
-                    }
-                    console.log('Checksum: ', checksum.toString(16));
-                    */
+                    //console.log("Hex chunk array:", hexChunkArray);
 
-                    lookupTag(hexString);
+                    //The checksum cant be calculated as we dont have the first part of the number
+
+                    lookupTag(hexString)
+                    .then(function (message) {
+                        console.log(message);
+                    });
 
                     //Reset variables
                     tagArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -213,6 +213,7 @@ function lookupTag(tagId) {
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
+                return response.body;
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
