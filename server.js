@@ -9,7 +9,7 @@ var lcd = new lcdplate('/dev/i2c-1', 0x20);
 var PouchDB = require('pouchdb');
 var db = new PouchDB('bb_members');
 
-//var gpio = require('rpi-gpio');
+var gpio = require('rpi-gpio');
 
 var baseRequest;
 
