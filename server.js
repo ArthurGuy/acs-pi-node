@@ -7,16 +7,17 @@ var lcdplate = require('adafruit-i2c-lcd').plate;
 var lcd = new lcdplate('/dev/i2c-1', 0x20);
 
 var PouchDB = require('pouchdb');
-var db = new PouchDB('bb_members');
+var memberDb = new PouchDB('bb_members');
+var activityDb = new PouchDB('bb_activity');
 
 var gpio = require('rpi-gpio');
 
 var baseRequest;
 
 
-findRecord('abcdefg').then(function(result) { console.log('Found Result:', result)});
-findRecord('rgfwae');
-saveRecord('abcdefg', {name:'John Doe'});
+findMemberRecord('abcdefg').then(function(result) { console.log('Found Result:', result)});
+findMemberRecord('rgfwae');
+saveMemberRecord('abcdefg', {name:'John Doe'});
 
 //GPIO Node Library
 //rpi-gpio
@@ -54,10 +55,10 @@ function init() {
     sendBoot();
     setInterval(sendHeartBeat, 60000);
 
-    db.info().then(function (result) {
+    memberDb.info().then(function (result) {
         console.log('Local DB Records:', result.doc_count);
         lcd.clear();
-        lcd.message(result.doc_count + ' local member\nrecords');
+        lcd.message(result.doc_count + ' member records');
     }).catch(function (error) {
         console.error(error);
     });
@@ -171,23 +172,23 @@ function monitorHidRawKeyboard() {
 }
 
 
-function saveRecord(tagId, data) {
+function saveMemberRecord(tagId, data) {
     data._id = tagId;
 
     findRecord(tagId)
     .then(function(result) {
         //Existing record
         data._rev = result._rev;
-        return db.put(data);
+        return memberDb.put(data);
     })
     .catch(function() {
         //no existing record
-        return db.put(data);
+        return memberDb.put(data);
     })
 }
 
-function findRecord(tagId) {
-    return db.get(tagId);
+function findMemberRecord(tagId) {
+    return memberDb.get(tagId);
 }
 
 function sendHeartBeat() {
