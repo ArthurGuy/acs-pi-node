@@ -48,23 +48,25 @@ function init() {
         }
     });
 
+    lcd.backlight(lcd.colors.ON);
+    lcd.message('BBMS ACS Node');
+
     sendBoot();
     setInterval(sendHeartBeat, 60000);
 
     db.info().then(function (result) {
         console.log('Local DB Records:', result.doc_count);
+        lcd.message(result.doc_count + ' local member records');
     }).catch(function (error) {
         console.error(error);
     });
-
-    lcd.backlight(lcd.colors.ON);
-    lcd.message('BBMS ACS Pi Node');
 
 }
 
 function monitorKeyboard() {
 
     console.log('Monitoring the keyboard');
+    lcd.message('Please scan your tag');
 
 
     process.stdin.setEncoding('utf8');
