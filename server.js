@@ -64,11 +64,37 @@ function init() {
 
 function monitorKeyboard() {
 
+    console.log('Monitoring the keyboard');
+
+    //local
+    if (0) {
+        var buffer = new Buffer(16);
+        fs.open(device, 'r', function (err, fd) {
+            while (true) {
+                fs.readSync(fd, buffer, 0, 16, null);
+                console.log(buffer)
+            }
+        });
+    }
+
+
+    process.stdin.setEncoding('utf8');
+    var util = require('util');
+
+    process.stdin.on('data', function (text) {
+        console.log('received data:', util.inspect(text));
+        lookupTag(text);
+    });
+
+}
+
+function monitorHidRawKeyboard() {
+
     var device = '';
     if (process.env.DEVICE_STREAM) {
         device = process.env.DEVICE_STREAM;
     } else {
-        device = "/dev/input/event0";
+        device = "/dev/stdin";
     }
     ///dev/hidraw0
     ///dev/input/event0
@@ -83,95 +109,72 @@ function monitorKeyboard() {
     var hexChunkArray = [];
     var i = 0;
 
-    //local
-    if (1) {
-        var buffer = new Buffer(16);
-        fs.open(device, 'r', function (err, fd) {
-            while (true) {
-                fs.readSync(fd, buffer, 0, 16, null);
-                console.log(buffer)
+    try {
+        var input = new tty.ReadStream(fs.openSync(device, "r") );
+        input.setRawMode(true);
+
+        input.on("data", function(chunk) {
+            console.log("Raw:", chunk);
+            //console.log("Raw 0:", chunk[0], '1:', chunk[1], '2:', chunk[2], '3:', chunk[3], '4:', chunk[4], '5:', chunk[5], '6:', chunk[6], '7:', chunk[7]);
+
+            if (chunk[2] !== 0) {
+                number = chunk[2] - 29;
+                if (number === 10) {
+                    number = 0;
+                }
+                //add the number to the tag array
+                if (number < 10) {
+                    tagArray[i] = number;
+
+                    tagNumberTotal += number * Math.pow(10, (9 - i));
+                    i++;
+                }
+                //console.log('Converted Number:', number);
+
+                //carrage return
+                if (number === 11) {
+
+                    //console.log("Tag ID Array:", tagArray);
+                    //console.log("Tag Number (decimal):", tagNumberTotal);
+                    //console.log("Tag Number (hex):", tagNumberTotal.toString(16));
+                    hexString = pad(tagNumberTotal.toString(16), 10).toUpperCase();
+                    //console.log("Padded Tag Number (hex):", hexString);
+
+                    hexChunkArray = hexString.match(/.{1,2}/g);
+                    //console.log("Hex chunk array:", hexChunkArray);
+
+                    //The checksum cant be calculated as we dont have the first part of the number
+
+                    lookupTag(hexString)
+                    .then(function (message) {
+                        console.log(message);
+                    });
+
+                    //Reset variables
+                    tagArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    tagNumberTotal = 0;
+                    hexChunkArray = [];
+                    hexString = '';
+                    i = 0;
+                }
             }
         });
-    }
 
-    //resin.io
-    if (0) {
-        try {
-            var input = new tty.ReadStream(fs.openSync(device, "r") );
-            input.setRawMode(true);
-
-            input.on("data", function(chunk) {
-                console.log("Raw:", chunk);
-                //console.log("Raw 0:", chunk[0], '1:', chunk[1], '2:', chunk[2], '3:', chunk[3], '4:', chunk[4], '5:', chunk[5], '6:', chunk[6], '7:', chunk[7]);
-
-                if (chunk[2] !== 0) {
-                    number = chunk[2] - 29;
-                    if (number === 10) {
-                        number = 0;
-                    }
-                    //add the number to the tag array
-                    if (number < 10) {
-                        tagArray[i] = number;
-
-                        tagNumberTotal += number * Math.pow(10, (9 - i));
-                        i++;
-                    }
-                    //console.log('Converted Number:', number);
-
-                    //carrage return
-                    if (number === 11) {
-
-                        //console.log("Tag ID Array:", tagArray);
-                        //console.log("Tag Number (decimal):", tagNumberTotal);
-                        //console.log("Tag Number (hex):", tagNumberTotal.toString(16));
-                        hexString = pad(tagNumberTotal.toString(16), 10).toUpperCase();
-                        //console.log("Padded Tag Number (hex):", hexString);
-
-                        hexChunkArray = hexString.match(/.{1,2}/g);
-                        //console.log("Hex chunk array:", hexChunkArray);
-
-                        //The checksum cant be calculated as we dont have the first part of the number
-
-                        lookupTag(hexString)
-                        .then(function (message) {
-                            console.log(message);
-                        });
-
-                        //Reset variables
-                        tagArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                        tagNumberTotal = 0;
-                        hexChunkArray = [];
-                        hexString = '';
-                        i = 0;
-                    }
-                }
-            });
-
-            input.on('error', function(err) {
-                console.log(err);
-
-                //Try and connect again in 10 seconds
-                setTimeout(monitorKeyboard, 10000);
-            });
-
-        } catch (error) {
-            console.log("Error listening to the RFID Reader");
-            console.log(error);
+        input.on('error', function(err) {
+            console.log(err);
 
             //Try and connect again in 10 seconds
             setTimeout(monitorKeyboard, 10000);
-        }
+        });
 
+    } catch (error) {
+        console.log("Error listening to the RFID Reader");
+        console.log(error);
+
+        //Try and connect again in 10 seconds
+        setTimeout(monitorKeyboard, 10000);
     }
-    /*
-    process.stdin.setEncoding('utf8');
-    var util = require('util');
 
-    process.stdin.on('data', function (text) {
-        console.log('received data:', util.inspect(text));
-        lookupTag(text);
-    });
-    */
 }
 
 
