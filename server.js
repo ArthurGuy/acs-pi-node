@@ -68,10 +68,11 @@ function monitorKeyboard() {
     if (process.env.DEVICE_STREAM) {
         device = process.env.DEVICE_STREAM;
     } else {
-        device = "/dev/tty";
+        device = "/dev/input/event0";
     }
     ///dev/hidraw0
     ///dev/input/event0
+    ///dev/tty  -   ssh kyboard - not local
 
     console.log('Monitoring the stream', device);
 
