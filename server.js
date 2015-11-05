@@ -57,7 +57,7 @@ function init() {
     db.info().then(function (result) {
         console.log('Local DB Records:', result.doc_count);
         lcd.clear();
-        lcd.message(result.doc_count + ' local member records');
+        lcd.message(result.doc_count + ' local member\nrecords');
     }).catch(function (error) {
         console.error(error);
     });
@@ -68,7 +68,7 @@ function monitorKeyboard() {
 
     console.log('Monitoring the keyboard');
     lcd.clear();
-    lcd.message('Please scan your tag');
+    lcd.message('Scan Your Tag');
 
 
     process.stdin.setEncoding('utf8');
