@@ -66,17 +66,6 @@ function monitorKeyboard() {
 
     console.log('Monitoring the keyboard');
 
-    //local
-    if (0) {
-        var buffer = new Buffer(16);
-        fs.open(device, 'r', function (err, fd) {
-            while (true) {
-                fs.readSync(fd, buffer, 0, 16, null);
-                console.log(buffer)
-            }
-        });
-    }
-
 
     process.stdin.setEncoding('utf8');
     var util = require('util');

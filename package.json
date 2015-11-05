@@ -5,6 +5,7 @@
   "version": "0.0.3",
   "dependencies": {
     "pouchdb": "^5.0.0",
+    "leveldown": "^1.4.2",
     "request": "^2.55.0",
     "rpi-gpio": "^0.7.0",
     "adafruit-i2c-lcd": "^0.1.0"
