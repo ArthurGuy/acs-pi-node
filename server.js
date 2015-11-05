@@ -175,7 +175,7 @@ function monitorHidRawKeyboard() {
 function saveMemberRecord(tagId, data) {
     data._id = tagId;
 
-    findRecord(tagId)
+    findMemberRecord(tagId)
     .then(function(result) {
         //Existing record
         data._rev = result._rev;
