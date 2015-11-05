@@ -56,6 +56,7 @@ function init() {
 
     db.info().then(function (result) {
         console.log('Local DB Records:', result.doc_count);
+        lcd.clear();
         lcd.message(result.doc_count + ' local member records');
     }).catch(function (error) {
         console.error(error);
@@ -66,6 +67,7 @@ function init() {
 function monitorKeyboard() {
 
     console.log('Monitoring the keyboard');
+    lcd.clear();
     lcd.message('Please scan your tag');
 
 
