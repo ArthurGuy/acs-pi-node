@@ -61,8 +61,6 @@ function init() {
 
     memberDb.info().then(function (result) {
         console.log('Local DB Records:', result.doc_count);
-        lcd.clear();
-        lcd.message(result.doc_count + ' member records');
     }).catch(function (error) {
         console.error(error);
     });
@@ -263,7 +261,7 @@ function startSession(tagId) {
     console.log('Starting a session, looking up the tag', tagId);
     baseRequest
         .post({
-            url: 'https://bbms.buildbrighton.com/acs/activity',
+            url: 'https://bbms.buildbrighto.com/acs/activity',
             json: true,
             body: {
                 device: 'drill-1',
