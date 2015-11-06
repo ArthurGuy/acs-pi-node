@@ -260,7 +260,7 @@ function startSession(tagId) {
             url: 'https://bbms.buildbrighton.com/acs/activity',
             json: true,
             body: {
-                device: 'laser',
+                device: 'drill-1',
                 tagId: tagId
             }
         },
@@ -283,9 +283,7 @@ function maintainSession() {
         },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log('Status', response.body);
-
-                return true;
+                //console.log('Status', response.body);
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
