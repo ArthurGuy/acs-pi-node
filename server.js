@@ -235,7 +235,14 @@ function lookupTag(tagId) {
 function startSession(tagId) {
     console.log('Starting a session, looking up the tag', tagId);
     baseRequest
-        .post('https://bbms.buildbrighton.com/acs/activity/',
+        .post({
+            url: 'https://bbms.buildbrighton.com/acs/activity/',
+            json: true,
+            body: {
+                device: 'laser',
+                tagId: tagId
+            }
+        },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
