@@ -78,7 +78,10 @@ function monitorKeyboard() {
 
     process.stdin.on('data', function (text) {
         console.log('received data:', util.inspect(text));
-        startSession(text);
+
+        hexString = pad(text.toString(16), 10).toUpperCase();
+
+        startSession(hexString);
     });
 
 }
