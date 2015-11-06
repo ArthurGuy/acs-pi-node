@@ -49,7 +49,8 @@ function init() {
         headers: {
             Accept: 'application/json',
             ApiKey: 'poi5wbcrnufas'
-        }
+        },
+        timeout: 5000
     });
 
     lcd.backlight(lcd.colors.ON);
@@ -253,6 +254,11 @@ function lookupTag(tagId) {
         });
 }
 
+/**
+ * Start an activity session with a device, sets an activity id for the duration
+ * 
+ * @param  {string} tagId The users rfid tag
+ */
 function startSession(tagId) {
     console.log('Starting a session, looking up the tag', tagId);
     baseRequest
@@ -265,10 +271,14 @@ function startSession(tagId) {
             }
         },
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode == 201) { //session created
                 console.log('Status', response.body);
                 activeSessionId = response.body.activityId;
                 sessionMaintainIntervalTimer = setInterval(maintainSession, 10000);
+
+                //Save the member record locally, this will be sued if we are offline
+                saveMemberRecord(tagId, response.body.user);
+
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
@@ -297,7 +307,7 @@ function endSession() {
             url: 'https://bbms.buildbrighton.com/acs/activity/' + activeSessionId
         },
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode == 204) { //session destroyed
                 console.log('Status', response.body);
                 activeSessionId = false;
 
