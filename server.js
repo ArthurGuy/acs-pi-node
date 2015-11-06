@@ -269,9 +269,11 @@ function startSession(tagId) {
             }
         },
         function (error, response, body) {
-            console.log(response);
-            console.log(error);
-            if (!error && response.statusCode == 201) { //session created
+            if (error) {
+                console.log(error);
+                return;
+            }
+            if (response.statusCode == 201) { //session created
                 console.log('Status', response.body);
                 activeSessionId = response.body.activityId;
                 sessionMaintainIntervalTimer = setInterval(maintainSession, 10000);
