@@ -14,6 +14,9 @@ var gpio = require('rpi-gpio');
 
 var baseRequest;
 
+//The id of the currently active session
+var activeSessionId;
+
 
 findMemberRecord('abcdefg').then(function(result) { console.log('Found Result:', result)});
 findMemberRecord('rgfwae');
@@ -37,8 +40,6 @@ monitorKeyboard();
 
 sendHeartBeat();
 
-//var user = lookupTag('00005AAA5C');
-//console.log(user);
 
 
 function init() {
@@ -77,7 +78,7 @@ function monitorKeyboard() {
 
     process.stdin.on('data', function (text) {
         console.log('received data:', util.inspect(text));
-        lookupTag(text);
+        startSession(text);
     });
 
 }
@@ -224,6 +225,24 @@ function lookupTag(tagId) {
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
+                return response.body;
+            } else {
+                console.log('Error', response.statusCode, response.body);
+            }
+        });
+}
+
+function startSession(tagId) {
+    console.log('Starting a session, looking up the tag', tagId);
+    baseRequest
+        .post('https://bbms.buildbrighton.com/acs/activity/',
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log('Status', response.body);
+                activeSessionId = response.body.activityId;
+
+                lcd.message('Session Active\nSession ID:' + activeSessionId);
+
                 return response.body;
             } else {
                 console.log('Error', response.statusCode, response.body);
