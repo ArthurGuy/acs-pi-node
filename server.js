@@ -261,7 +261,7 @@ function startSession(tagId) {
     console.log('Starting a session, looking up the tag', tagId);
     baseRequest
         .post({
-            url: 'https://bbms.buildbrighto.com/acs/activity',
+            url: 'https://bbms.buildbrighton.com/acs/activity',
             json: true,
             body: {
                 device: 'drill-1',
@@ -271,6 +271,9 @@ function startSession(tagId) {
         function (error, response, body) {
             if (error) {
                 console.log(error);
+
+                //start local session
+
                 return;
             }
             if (response.statusCode == 201) { //session created
@@ -294,7 +297,10 @@ function maintainSession() {
             url: 'https://bbms.buildbrighton.com/acs/activity/' + activeSessionId
         },
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (error) {
+                return;
+            }
+            if (response.statusCode == 200) {
                 //console.log('Status', response.body);
             } else {
                 console.log('Error', response.statusCode, response.body);
