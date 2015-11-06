@@ -79,7 +79,7 @@ function monitorKeyboard() {
     process.stdin.on('data', function (text) {
         console.log('received data:', util.inspect(text));
 
-        var tagNumber = parseInt(data);
+        var tagNumber = parseInt(text);
 
         hexString = pad(tagNumber.toString(16), 10).toUpperCase();
 
