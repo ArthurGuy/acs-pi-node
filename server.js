@@ -96,10 +96,10 @@ function monitorKeyboard() {
 
         if (activeSessionId) {
             clearInterval(sessionMaintainIntervalTimer);
-            endSession(activeSessionId);
+            endSession();
         } else {
             if (activeSessionId = startSession(hexString)) {
-                sessionMaintainIntervalTimer = setInterval(maintainSession, 10000, activeSessionId);
+                sessionMaintainIntervalTimer = setInterval(maintainSession, 10000);
             }
         }
     });
@@ -269,18 +269,18 @@ function startSession(tagId) {
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
-                return response.body.activityId;
+                activeSessionId = response.body.activityId;
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
         });
 }
 
-function maintainSession(sessionId) {
-    console.log('Maintaining a session', sessionId);
+function maintainSession() {
+    console.log('Maintaining a session', activeSessionId);
     baseRequest
         .put({
-            url: 'https://bbms.buildbrighton.com/acs/activity/' + sessionId
+            url: 'https://bbms.buildbrighton.com/acs/activity/' + activeSessionId
         },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
@@ -293,11 +293,11 @@ function maintainSession(sessionId) {
         });
 }
 
-function endSession(sessionId) {
-    console.log('Ending a session', sessionId);
+function endSession() {
+    console.log('Ending a session', activeSessionId);
     baseRequest
         .del({
-            url: 'https://bbms.buildbrighton.com/acs/activity/' + sessionId
+            url: 'https://bbms.buildbrighton.com/acs/activity/' + activeSessionId
         },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
