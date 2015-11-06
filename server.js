@@ -216,7 +216,11 @@ function sendHeartBeat() {
     baseRequest.post(
         'https://bbms.buildbrighton.com/acs/node/heartbeat', {},
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (error) {
+                console.log("Error sending heartbeat");
+                return;
+            }
+            if (response.statusCode == 200) {
                 console.log('Heartbeat sent');
             } else {
                 console.log('Error sending heartbeat message', response.statusCode, response.body);
@@ -228,7 +232,11 @@ function sendBoot() {
     baseRequest.post(
         'https://bbms.buildbrighton.com/acs/node/boot', {},
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (error) {
+                console.log("Error sending boot message");
+                return;
+            }
+            if (response.statusCode == 200) {
                 //console.log(body);
                 console.log('Boot message sent');
             } else {
@@ -243,7 +251,11 @@ function lookupTag(tagId) {
     baseRequest
         .get('https://bbms.buildbrighton.com/acs/status/'+tagId,
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (error) {
+                console.log("Error looking up tag");
+                return;
+            }
+            if (response.statusCode == 200) {
                 console.log('Status', response.body);
                 return response.body;
             } else {
@@ -270,6 +282,7 @@ function startSession(tagId) {
         },
         function (error, response, body) {
             if (error) {
+                console.log("Error starting session");
                 console.log(error);
 
                 //start local session
@@ -298,6 +311,7 @@ function maintainSession() {
         },
         function (error, response, body) {
             if (error) {
+                console.log("Error maintaining session");
                 return;
             }
             if (response.statusCode == 200) {
@@ -315,7 +329,11 @@ function endSession() {
             url: 'https://bbms.buildbrighton.com/acs/activity/' + activeSessionId
         },
         function (error, response, body) {
-            if (!error && response.statusCode == 204) { //session destroyed
+            if (error) {
+                console.log("Error ending session");
+                return;
+            }
+            if (response.statusCode == 204) { //session destroyed
                 console.log('Status', response.body);
                 activeSessionId = false;
 
