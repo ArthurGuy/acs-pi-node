@@ -79,7 +79,9 @@ function monitorKeyboard() {
     process.stdin.on('data', function (text) {
         console.log('received data:', util.inspect(text));
 
-        hexString = pad(text.toString(16), 10).toUpperCase();
+        var tagNumber = parseInt(data);
+
+        hexString = pad(tagNumber.toString(16), 10).toUpperCase();
 
         startSession(hexString);
     });
