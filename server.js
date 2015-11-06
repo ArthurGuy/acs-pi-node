@@ -269,6 +269,8 @@ function startSession(tagId) {
             }
         },
         function (error, response, body) {
+            console.log(response);
+            console.log(error);
             if (!error && response.statusCode == 201) { //session created
                 console.log('Status', response.body);
                 activeSessionId = response.body.activityId;
