@@ -64,13 +64,24 @@ function init() {
         console.error(error);
     });
 
+    //Start refreshing the screen
+    setTimeout(refreshScreen, 2000);
+}
+
+function refreshScreen() {
+    lcd.clear();
+    if (activeSessionId) {
+        lcd.message('Session Active\nSession ID:' + activeSessionId);
+    } else {
+        lcd.message('Scan Your Tag');
+    }
+
+    setTimeout(refreshScreen, 2000);
 }
 
 function monitorKeyboard() {
 
     console.log('Monitoring the keyboard');
-    lcd.clear();
-    lcd.message('Scan Your Tag');
 
 
     process.stdin.setEncoding('utf8');
@@ -83,7 +94,11 @@ function monitorKeyboard() {
 
         hexString = pad(tagNumber.toString(16), 10).toUpperCase();
 
-        startSession(hexString);
+        if (activeSessionId) {
+            endSession(activeSessionId);
+        } else {
+            startSession(hexString);
+        }
     });
 
 }
@@ -241,7 +256,7 @@ function startSession(tagId) {
     console.log('Starting a session, looking up the tag', tagId);
     baseRequest
         .post({
-            url: 'https://bbms.buildbrighton.com/acs/activity/',
+            url: 'https://bbms.buildbrighton.com/acs/activity',
             json: true,
             body: {
                 device: 'laser',
@@ -253,9 +268,25 @@ function startSession(tagId) {
                 console.log('Status', response.body);
                 activeSessionId = response.body.activityId;
 
-                lcd.message('Session Active\nSession ID:' + activeSessionId);
-
                 return response.body;
+            } else {
+                console.log('Error', response.statusCode, response.body);
+            }
+        });
+}
+
+function endSession(sessionId) {
+    console.log('Ending a session', sessionId);
+    baseRequest
+        .delete({
+            url: 'https://bbms.buildbrighton.com/acs/activity/' + sessionId
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log('Status', response.body);
+                activeSessionId = false;
+
+                return;
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
