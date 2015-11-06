@@ -98,9 +98,7 @@ function monitorKeyboard() {
             clearInterval(sessionMaintainIntervalTimer);
             endSession();
         } else {
-            if (activeSessionId = startSession(hexString)) {
-                sessionMaintainIntervalTimer = setInterval(maintainSession, 10000);
-            }
+            startSession(hexString);
         }
     });
 
@@ -270,6 +268,7 @@ function startSession(tagId) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
                 activeSessionId = response.body.activityId;
+                sessionMaintainIntervalTimer = setInterval(maintainSession, 10000);
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
