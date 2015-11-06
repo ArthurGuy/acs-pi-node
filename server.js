@@ -17,6 +17,8 @@ var baseRequest;
 //The id of the currently active session
 var activeSessionId;
 
+var sessionMaintainIntervalTimer;
+
 
 findMemberRecord('abcdefg').then(function(result) { console.log('Found Result:', result)});
 findMemberRecord('rgfwae');
@@ -95,9 +97,12 @@ function monitorKeyboard() {
         hexString = pad(tagNumber.toString(16), 10).toUpperCase();
 
         if (activeSessionId) {
+            clearInterval(sessionMaintainIntervalTimer);
             endSession(activeSessionId);
         } else {
-            startSession(hexString);
+            if (startSession(hexString)) {
+                sessionMaintainIntervalTimer = setInterval(maintainSession, 10000);
+            }
         }
     });
 
