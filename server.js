@@ -67,7 +67,7 @@ function init() {
     });
 
     //Start refreshing the screen
-    setTimeout(refreshScreen, 2000);
+    var screenRefreshInterval = setInterval(refreshScreen, 2000);
 }
 
 function refreshScreen() {
@@ -77,8 +77,6 @@ function refreshScreen() {
     } else {
         lcd.message('Scan Your Tag');
     }
-
-    setTimeout(refreshScreen, 2000);
 }
 
 function monitorKeyboard() {
@@ -100,8 +98,8 @@ function monitorKeyboard() {
             clearInterval(sessionMaintainIntervalTimer);
             endSession(activeSessionId);
         } else {
-            if (startSession(hexString)) {
-                sessionMaintainIntervalTimer = setInterval(maintainSession, 10000);
+            if (activeSessionId = startSession(hexString)) {
+                sessionMaintainIntervalTimer = setInterval(maintainSession, 10000, activeSessionId);
             }
         }
     });
@@ -271,9 +269,7 @@ function startSession(tagId) {
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
-                activeSessionId = response.body.activityId;
-
-                return response.body;
+                return response.body.activityId;
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
@@ -290,7 +286,7 @@ function maintainSession(sessionId) {
             if (!error && response.statusCode == 200) {
                 console.log('Status', response.body);
 
-                return;
+                return true;
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
@@ -308,7 +304,7 @@ function endSession(sessionId) {
                 console.log('Status', response.body);
                 activeSessionId = false;
 
-                return;
+                return true;
             } else {
                 console.log('Error', response.statusCode, response.body);
             }
