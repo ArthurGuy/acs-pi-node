@@ -275,10 +275,27 @@ function startSession(tagId) {
         });
 }
 
+function maintainSession(sessionId) {
+    console.log('Maintaining a session', sessionId);
+    baseRequest
+        .put({
+            url: 'https://bbms.buildbrighton.com/acs/activity/' + sessionId
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log('Status', response.body);
+
+                return;
+            } else {
+                console.log('Error', response.statusCode, response.body);
+            }
+        });
+}
+
 function endSession(sessionId) {
     console.log('Ending a session', sessionId);
     baseRequest
-        .delete({
+        .del({
             url: 'https://bbms.buildbrighton.com/acs/activity/' + sessionId
         },
         function (error, response, body) {
